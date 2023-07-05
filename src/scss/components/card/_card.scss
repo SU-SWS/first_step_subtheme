@@ -15,13 +15,7 @@
     margin-bottom: 0;
   }
 
-  .first-step-button {
-    display: block;
-    background-color: #E7F5FF;
-    color: #00548F;
-    font-weight: 700;
-    width: 100%;
-    padding: 2rem;
+  a {
     text-decoration: none;
 
     &:hover,
@@ -30,5 +24,14 @@
       color: #2e2d29;
       text-decoration: underline;
     }
+  }
+
+  .first-step-button {
+    display: block;
+    background-color: #E7F5FF;
+    color: #00548F;
+    font-weight: 700;
+    width: 100%;
+    padding: 2rem;
   }
 }
