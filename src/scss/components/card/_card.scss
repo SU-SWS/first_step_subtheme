@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+.first-step-card {
+
+  .media {
+    padding-top: 1.6rem;
+    padding-bottom: 0;
+
+    @include grid-media-min('md') {
+      padding-top: 1.8rem;
+    }
+  }
+
+  p:last-of-type {
+    margin-bottom: 0;
+  }
+
+  a {
+    text-decoration: none;
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: #2e2d29;
+      text-decoration: underline;
+    }
+  }
+
+  .first-step-button {
+    display: block;
+    background-color: #E7F5FF;
+    color: #00548F;
+    font-weight: 700;
+    width: 100%;
+    padding: 2rem;
+  }
+}
