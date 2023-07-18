@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+#searchForm {
+  justify-content: center;
+
+  input {
+    margin: 0;
+
+    &:focus {
+      -webkit-box-shadow: unset;
+      box-shadow: unset;
+    }
+  }
+}
