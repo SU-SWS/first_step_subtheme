@@ -4,11 +4,18 @@
   justify-content: center;
 
   input {
-    margin: 0;
+
+    @include grid-media-min('sm') {
+      margin: 0;
+    }
 
     &:focus {
       -webkit-box-shadow: unset;
       box-shadow: unset;
     }
+  }
+  
+  button {
+    max-width: 46rem;
   }
 }
