@@ -2,7 +2,7 @@
 
 /* Help Bar Styling */
 .first-step-help-bar {
-  background: #016895;
+  background: $su-color-sky-dark;
   padding: 4rem 0rem;
   align-items: center;
 
@@ -10,7 +10,7 @@
     margin-left: 10rem;
 
     h2 {
-      color: #fff;
+      color: $su-color-white;
       margin-bottom: 0;
       font-size: 1.5625em;
       font-weight: 400;  
@@ -26,24 +26,8 @@
       gap: 3rem;
       
       .livechat_button a,
-      .su-button-secondary-white {
-        text-decoration: none;
-        padding: 1rem 2rem 1.15rem;
-        background-color: transparent;
-        -webkit-box-shadow: inset 0 0 0 2px #fff;
-        box-shadow: inset 0 0 0 2px #fff;
-        color: #fff;
-        display: inline-block;
-        font-size: 2rem;
-        font-weight: 400;
-        line-height: 1;
-        text-align: center;
-
-        &:hover,
-        &:focus,
-        &:active {
-          text-decoration: underline;
-        }
+      .first-step-button--secondary-white {
+        @include first-step-button--secondary-white;
       }
     }
   }
@@ -78,5 +62,44 @@
       }
     }
 
+  }
+}
+
+/* WYSIWYG help bar */
+.su-wysiwyg-text {
+
+  .first-step-help-bar {
+    position: relative; /* child absolute */
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      /* fill vertically */
+      top: 0;
+      bottom: 0;
+      width: 9600px;
+      right: 100%;
+      background: $su-color-sky-dark;
+    }
+
+    &::after {
+      left: 100%;
+      background: $su-color-sky-dark;
+    }
+
+    .first-step-help-bar-text {
+      margin-left: 0;
+
+      h2 {
+        padding-top: 0;
+      }
+    }
+
+    .main-region {
+      padding-right: 0;
+    }
   }
 }
