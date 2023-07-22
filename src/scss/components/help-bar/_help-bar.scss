@@ -5,12 +5,12 @@
   background: $su-color-sky-dark;
   padding: 4rem 0rem;
   align-items: center;
+  color: $su-color-white;
 
   .first-step-help-bar-text {
     margin-left: 10rem;
 
     h2 {
-      color: $su-color-white;
       margin-bottom: 0;
       font-size: 1.5625em;
       font-weight: 400;  
@@ -72,6 +72,7 @@
     position: relative; /* child absolute */
     padding-top: 4rem;
     padding-bottom: 4rem;
+    margin-bottom: -3rem;
 
     &::before,
     &::after {
@@ -87,7 +88,16 @@
 
     &::after {
       left: 100%;
-      background: $su-color-sky-dark;
+    }
+
+    &.bg-lagunita {
+      background: $su-color-lagunita;
+      font-family: serif;
+
+      &::before,
+      &::after {
+        background: $su-color-lagunita;
+      }
     }
 
     .first-step-help-bar-text {
