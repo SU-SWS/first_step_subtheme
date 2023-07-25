@@ -3,16 +3,8 @@
 .first-step-card {
 
   .media {
-    padding-top: 3.2rem;
+    padding-top: 1em;
     padding-bottom: 0;
-
-    @include grid-media-min('md') {
-      padding-top: 3.6rem;
-    }
-
-    @include grid-media-min('2xl') {
-      padding-top: 3.8rem;
-    }
   }
 
   p:last-of-type {
@@ -27,6 +19,15 @@
     &:active {
       color: #2e2d29;
       text-decoration: underline;
+    }
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+
+    li {
+      margin-bottom: 0.1em;
     }
   }
 
