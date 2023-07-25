@@ -3,7 +3,10 @@
 /* Help Bar Styling */
 .first-step-help-bar {
   background: $su-color-sky-dark;
-  padding: 4rem 0rem;
+  @include responsive-spacing('padding-top', 3);
+  @include responsive-spacing('padding-bottom', 3);
+  padding-right: 0;
+  padding-left: 0;
   align-items: center;
   color: $su-color-white;
 
@@ -69,8 +72,8 @@
 .su-wysiwyg-text {
   .first-step-help-bar {
     position: relative; /* child absolute */
-    padding-top: 4rem;
-    padding-bottom: 4rem;
+    @include responsive-spacing('padding-top', 3);
+    @include responsive-spacing('padding-bottom', 3);
     margin-bottom: -3rem;
 
     &::before,
@@ -91,11 +94,18 @@
 
     &.bg-lagunita {
       background: $su-color-lagunita;
-      font-family: serif;
+      font-family: 'Source Serif Pro';
 
       &::before,
       &::after {
         background: $su-color-lagunita;
+      }
+
+      h2 {
+        @include type-a;
+        font-weight: $su-font-black;
+        padding-top: 0;
+        margin-bottom: 0;
       }
     }
 
