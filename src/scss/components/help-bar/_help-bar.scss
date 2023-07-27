@@ -27,6 +27,15 @@
     .first-step-help-bar__link {
       display: flex;
       gap: 3rem;
+
+      .media-entity-wrapper {
+        margin-right: 0;
+        margin-left: 0;
+
+        .media {
+          padding-bottom: 0;
+        }
+      }
       
       .livechat_button a,
       .first-step-button--secondary-white {
@@ -83,7 +92,7 @@
       /* fill vertically */
       top: 0;
       bottom: 0;
-      width: 9600px;
+      width: 100%;
       right: 100%;
       background: $su-color-sky-dark;
     }
@@ -106,6 +115,11 @@
         font-weight: $su-font-black;
         padding-top: 0;
         margin-bottom: 0;
+
+        @include grid-media-max('md') {
+          margin-right: 1rem;
+          margin-left: 1rem;
+        }
       }
     }
 
@@ -114,12 +128,30 @@
 
       h2 {
         padding-top: 0;
+
+        @include grid-media-max('md') {
+          margin-right: 1rem;
+          margin-left: 1rem;
+        }
       }
     }
 
     .main-region {
       padding-right: 0;
       padding-left: 0;
+
+      @include grid-media-min('lg') {
+        .first-step-help-bar__link {
+          justify-content: space-between;
+        }
+      }
     }
+  }
+}
+
+// help bar overflow fixup
+.layout--layout-paragraphs-one-column {
+  .layout__region {
+    overflow-x: clip;
   }
 }

@@ -8,10 +8,6 @@
     @include grid-media-min('sm') {
       margin: 0;
     }
-
-    &:focus {
-      box-shadow: unset;
-    }
   }
   
   button {
