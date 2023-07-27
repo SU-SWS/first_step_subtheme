@@ -27,6 +27,16 @@
     .first-step-help-bar__link {
       display: flex;
       gap: 3rem;
+      justify-content: space-between;
+
+      .media-entity-wrapper {
+        margin-right: 0;
+        margin-left: 0;
+
+        .media {
+          padding-bottom: 0;
+        }
+      }
       
       .livechat_button a,
       .first-step-button--secondary-white {
