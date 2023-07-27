@@ -1,0 +1,66 @@
+@charset 'UTF-8';
+
+// Top banner styles
+.node-stanford-page-su-page-banner {  
+  .su-hero {
+    display: block;
+    min-height: 220px;
+  
+    .su-hero__media {
+      min-height: auto;
+      position: absolute;
+  
+      img {
+        opacity: 0.8;
+      }
+    }
+  
+    .su-hero__card {
+      background: transparent;
+      border: 0;
+      box-shadow: none;
+      left: auto;
+      text-align: center;
+      max-width: unset;
+      margin: 0;
+      bottom: unset;
+  
+      @include grid-media-max('sm') {
+        text-align: left;
+      }
+  
+      .su-card__contents {
+        color: $su-color-white;
+        width: 75%;
+        margin: 0 auto;
+        min-height: 220px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        @include grid-media-max('sm') {
+          width: 100%;
+        }
+
+        :first-child {
+          margin-top: 0;
+        }
+  
+        h2 {
+          font-size: 2.44140625em;
+          letter-spacing: -.016em;
+          font-weight: 900;
+          font-family: 'Source Serif Pro';
+  
+          @include grid-media-max('md') {
+            font-size: 2.0751953125em;
+          }
+        }
+  
+        p {
+          @include big-paragraph;
+        }
+      }
+    }
+  }
+}
