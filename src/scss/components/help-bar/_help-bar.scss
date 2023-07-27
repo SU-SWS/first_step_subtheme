@@ -1,0 +1,125 @@
+@charset "UTF-8";
+
+/* Help Bar Styling */
+.first-step-help-bar {
+  background: $su-color-sky-dark;
+  @include responsive-spacing('padding-top', 3);
+  @include responsive-spacing('padding-bottom', 3);
+  padding-right: 0;
+  padding-left: 0;
+  align-items: center;
+  color: $su-color-white;
+
+  .first-step-help-bar-text {
+    margin-left: 10rem;
+
+    h2 {
+      margin-bottom: 0;
+      font-size: 1.5625em;
+      font-weight: 400;  
+      letter-spacing: -.012em;
+    }
+  }
+
+  .main-region {
+    padding-right: 2rem;
+
+    .first-step-help-bar__link {
+      display: flex;
+      gap: 3rem;
+      
+      .livechat_button a,
+      .first-step-button--secondary-white {
+        @include first-step-button--secondary-white;
+      }
+    }
+  }
+}
+
+@include grid-media-max('sm') {
+  .first-step-help-bar__link {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@include grid-media-max('lg') {
+  .first-step-help-bar {
+    flex-direction: column;
+    row-gap: 2rem;
+
+    .left-region {
+      text-align: center;
+
+      .first-step-help-bar-text {
+        margin-left: 0;
+      }
+    }
+
+    .main-region {
+      padding-left: 2rem;
+
+      .first-step-help-bar__link {
+        justify-content: center;
+        gap: 2rem;
+      }
+    }
+
+  }
+}
+
+/* WYSIWYG help bar */
+.su-wysiwyg-text {
+  .first-step-help-bar {
+    position: relative; /* child absolute */
+    @include responsive-spacing('padding-top', 3);
+    @include responsive-spacing('padding-bottom', 3);
+    margin-bottom: -3rem;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      /* fill vertically */
+      top: 0;
+      bottom: 0;
+      width: 9600px;
+      right: 100%;
+      background: $su-color-sky-dark;
+    }
+
+    &::after {
+      left: 100%;
+    }
+
+    &.bg-lagunita {
+      background: $su-color-lagunita;
+      font-family: 'Source Serif Pro';
+
+      &::before,
+      &::after {
+        background: $su-color-lagunita;
+      }
+
+      h2 {
+        @include type-a;
+        font-weight: $su-font-black;
+        padding-top: 0;
+        margin-bottom: 0;
+      }
+    }
+
+    .first-step-help-bar-text {
+      margin-left: 0;
+
+      h2 {
+        padding-top: 0;
+      }
+    }
+
+    .main-region {
+      padding-right: 0;
+      padding-left: 0;
+    }
+  }
+}
