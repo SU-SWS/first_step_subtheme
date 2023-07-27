@@ -47,13 +47,12 @@
         }
   
         h2 {
-          font-size: 2.44140625em;
-          letter-spacing: -.016em;
+          font-size: 2.5em;
           font-weight: 900;
           font-family: 'Source Serif Pro';
   
           @include grid-media-max('md') {
-            font-size: 2.0751953125em;
+            font-size: 2em;
           }
         }
   
