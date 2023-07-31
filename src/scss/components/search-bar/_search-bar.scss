@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 #searchForm {
-  justify-content: center;
+  justify-content: start;
 
   input {
 
@@ -12,5 +12,11 @@
   
   button {
     max-width: 46rem;
+  }
+}
+
+.jumpstart-ui--one-column {
+  #searchForm {
+    justify-content: center;
   }
 }
