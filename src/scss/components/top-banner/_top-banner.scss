@@ -47,13 +47,8 @@
         }
   
         h2 {
-          font-size: 2.5em;
-          font-weight: 900;
+          @include type-a;
           font-family: 'Source Serif Pro';
-  
-          @include grid-media-max('md') {
-            font-size: 2em;
-          }
         }
   
         p {
