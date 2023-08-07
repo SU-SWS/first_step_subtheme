@@ -122,18 +122,23 @@
       }
     }
 
-    .first-step-help-bar-text {
-      margin-left: 0;
+    .left-region {
+      max-width: unset;
 
-      h2 {
-        padding-top: 0;
-
-        @include grid-media-max('md') {
-          margin-right: 1rem;
-          margin-left: 1rem;
+      .first-step-help-bar-text {
+        margin-left: 0;
+  
+        h2 {
+          padding-top: 0;
+  
+          @include grid-media-max('md') {
+            margin-right: 1rem;
+            margin-left: 1rem;
+          }
         }
       }
     }
+
 
     .main-region {
       padding-right: 0;
