@@ -2,7 +2,7 @@
 
 /* Help Bar Styling */
 .first-step-help-bar {
-  background: $su-color-sky-dark;
+  background: $su-color-digital-blue-dark;
   @include responsive-spacing('padding-top', 3);
   @include responsive-spacing('padding-bottom', 3);
   padding-right: 0;
@@ -94,7 +94,7 @@
       bottom: 0;
       width: 100%;
       right: 100%;
-      background: $su-color-sky-dark;
+      background: $su-color-digital-blue-dark;
     }
 
     &::after {
