@@ -1,31 +1,24 @@
 # [First Step Subtheme](https://github.com/SU-SWS/first_step_subtheme)
-##### Version: 9.x-1.0-dev
+##### Version: 1.0.0
 
 Changelog: [Changelog.txt](CHANGELOG.txt)
 
 Description
 ---
 
-The First Step Subtheme is a Stanford sub-theme that works with the Stanford Basic theme and was built by modifying the [Stanford Starter](https://github.com/SU-SWS/stanford_starter) Subtheme
+The First Step Subtheme is a Stanford sub-theme that works with the Stanford Basic theme and was built by modifying the [Stanford Starter](https://github.com/SU-SWS/stanford_starter) Subtheme. 
 
 Documentation
 ---
 See subtheming guides and best practices here: 
 https://devguide.sites.stanford.edu/front-end/drupal/sub-themes 
 
-Installation
+Sites
 ---
-1. Review the documentation link above for best practices, particularly the Do's and Don't's sections.
-2. Fork or download this theme repository. 
-3. Change all theme file names from including "first_step_subtheme" to including the machine name of your theme.
-4. Run a search and replace throughout the theme files to replace "first_step_subtheme" with the machine name of your theme.
-5. Add any specific brand colors you need (in addition to the decanter colors that are already available) to src/scss/utilities/variables/_colors.scss. 
-See all the colors already available through decanter: https://decanter.stanford.edu/page/brand-design-elements-color/ 
-6. If desired, add font settings if you need to override and use fonts other than decanter fonts ( https://decanter.stanford.edu/page/brand-design-elements-typography/ ) [link],
-by defining a font library in the themename.libraries.yml file.
-7. If desired, add button mixins in src/scss/utilities/mixins/_buttons.scss with your button styles and then reference them and use them in src/scss/theme/_button.scss.
-8. If desired, add cta and link mixins in src/scss/utilities/mixins/_cta.scss with your button styles and then reference them and use them in src/scss/theme/_cta.scss.
-9. If you want to skin or theme a component, like a paragraph, create a _mycomponent.scss file in src/scss/components folder. Consider using a subfolder like 'cards' or 'banners' if applicable.
+This subtheme is installed
+https://firststepsandbox-test.sites.stanford.edu/ (TEST)
+https://techsource.stanford.edu
+
 
 Configuration
 ---
