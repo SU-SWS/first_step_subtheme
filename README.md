@@ -15,8 +15,8 @@ https://devguide.sites.stanford.edu/front-end/drupal/sub-themes
 
 Sites
 ---
-This subtheme is installed
-https://firststepsandbox-test.sites.stanford.edu/ (TEST)
+This subtheme is installed on
+https://firststepsandbox-test.sites.stanford.edu/ (TEST) AND
 https://techsource.stanford.edu
 
 
