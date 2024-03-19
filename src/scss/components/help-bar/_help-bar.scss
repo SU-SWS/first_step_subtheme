@@ -27,6 +27,13 @@
     .first-step-help-bar__link {
       display: flex;
       gap: 3rem;
+      list-style: none;
+      margin: unset;
+      padding: unset;
+
+      li {
+        margin-bottom: 0;
+      }
 
       .media-entity-wrapper {
         margin-right: 0;
