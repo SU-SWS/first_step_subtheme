@@ -1,5 +1,5 @@
 # [First Step Subtheme](https://github.com/SU-SWS/first_step_subtheme)
-##### Version: 1.0.0
+##### Version: 1.0.1
 
 Changelog: [Changelog.txt](CHANGELOG.txt)
 
