@@ -45,10 +45,18 @@
         :first-child {
           margin-top: 0;
         }
+
+        h2,
+        h3,
+        h4,
+        .su-font-splash {
+          @include responsive-spacing('margin-bottom', -1);
+
+          font-family: 'Source Serif Pro';
+        }
   
         h2 {
           @include type-a;
-          font-family: 'Source Serif Pro';
         }
   
         p {
