@@ -68,6 +68,15 @@ const SearchForm = (props) => {
     >
       <FilterContainer>
         <h2>Filter By</h2>
+        {/* Chips */}
+        {pageTypeRefinements.map((item, i) => {
+          return item.isRefined && <button onClick={() => refinePageTypes(item.value)}>{item.value}</button>
+
+        })}
+        {sharedRefinements.map((item, i) => {
+          return item.isRefined && <button onClick={() => refinePageTypes(item.value)}>{item.value}</button>
+
+        })}
         <fieldset>
           <legend style={{fontSize: "2.4rem"}}>Resources</legend>
 
