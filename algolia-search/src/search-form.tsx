@@ -57,13 +57,7 @@ const SearchForm = (props) => {
   return (
     <form
       role="search"
-      onSubmit={(e) => {
-        e.preventDefault();
-        refine(inputRef.current.value)
-      }}
       onReset={(e) => {
-        inputRef.current.value = ""
-        refine("");
         pageTypeRefinements.map(refinementItem => {
           if (refinementItem.isRefined) refinePageTypes(refinementItem.value)
         })
@@ -72,31 +66,10 @@ const SearchForm = (props) => {
         })
       }}
     >
-      <div>
-        <label htmlFor="keyword-search-algolia">
-          Keywords<span className="visually-hidden">&nbsp;Search</span>
-        </label>
-        <input
-          id="keyword-search-algolia"
-          ref={inputRef}
-          autoComplete="on"
-          autoCorrect="on"
-          autoCapitalize="off"
-          spellCheck={true}
-          maxLength={128}
-          type="search"
-          defaultValue={query}
-        />
-
-        <div style={{display: "flex", gap: "1rem", marginTop: "1rem"}}>
-          <button type="submit">Submit</button>
-          <button type="reset">Clear all</button>
-        </div>
-      </div>
-
       <FilterContainer>
+        <h2>Filter By</h2>
         <fieldset>
-          <legend style={{fontSize: "2.4rem"}}>Filter by Access & Affiliation</legend>
+          <legend style={{fontSize: "2.4rem"}}>Resources</legend>
 
           <ul style={{listStyle: "none", paddingLeft: "0", marginInline: "0"}}>
             {pageTypeRefinements.map((item, i) =>
@@ -131,7 +104,7 @@ const SearchForm = (props) => {
           </ul>
         </fieldset>
         <fieldset>
-          <legend style={{fontSize: "2.4rem"}}>Filter by Discipline</legend>
+          <legend style={{fontSize: "2.4rem"}}>Allowed Users</legend>
 
           <ul style={{listStyle: "none", paddingLeft: "0", marginInline: "0"}}>
             {sharedRefinements.map((item, i) =>
@@ -165,6 +138,7 @@ const SearchForm = (props) => {
             )}
           </ul>
         </fieldset>
+        <button type="reset">Clear all</button>
       </FilterContainer>
     </form>
   );
