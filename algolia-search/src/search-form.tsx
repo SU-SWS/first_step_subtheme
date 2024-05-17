@@ -36,7 +36,6 @@ const SearchForm = (props) => {
     limit: 1000,
     sortBy: ["name:asc"]
   });
-  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);

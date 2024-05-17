@@ -1,13 +1,12 @@
 import algoliasearch from 'algoliasearch/lite';
 import {createIslandWebComponent} from 'preact-island'
-import {HitsProps, InstantSearch, useHits, Configure} from 'react-instantsearch';
+import {HitsProps, InstantSearch, useInfiniteHits} from 'react-instantsearch';
 import SearchForm from "./search-form";
 import EventHit from "./hits/events";
 import NewsHit from "./hits/news";
 import DefaultHit from "./hits/default-hit";
 import styled from "styled-components";
 import {StanfordHit} from "./hits/hit.types";
-import {lazy} from "preact/compat";
 
 const islandName = 'algolia-search'
 const appId = window.drupalSettings?.stanfordAlgolia.appId || process.env.ALGOLIA_APP_ID
@@ -57,8 +56,8 @@ const Container = styled.div`
   }
 `
 
-const CustomHits = (props) => {
-  const {hits} = useHits(props);
+const CustomHits = () => {
+  const { hits, showMore, isLastPage } = useInfiniteHits();
   if (hits.length === 0) return (
     <p>No results for your search. Please try another search.</p>
   )
@@ -71,6 +70,11 @@ const CustomHits = (props) => {
           <Hit hit={hit}/>
         </li>
       )}
+      { !isLastPage && 
+        <button onClick={showMore}>
+          Load more<span className="sr-only">results</span>
+        </button>
+      }
     </ResultsContainer>
   )
 }
@@ -105,9 +109,6 @@ const Search = () => {
 
       >
         <Container>
-          <Configure
-            hitsPerPage={1000}
-          />
           <SearchForm/>
           <CustomHits/>
         </Container>
