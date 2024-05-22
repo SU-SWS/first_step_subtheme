@@ -100,3 +100,8 @@ allpages:
 #    state:
 #      dist/css/state.css: {}
 
+algolia-search:
+  js:
+    algolia-search/dist/islands/algolia-search.island.js: {}
+  dependencies:
+    - core/drupalSettings

@@ -92,6 +92,7 @@ const SearchForm = (props) => {
                   display: "flex",
                   alignItems: "center",
                   fontSize: "2rem",
+                  width: "fit-content",
                 }}>
                   <input
                     type="checkbox"
@@ -127,6 +128,7 @@ const SearchForm = (props) => {
                   display: "flex",
                   alignItems: "center",
                   fontSize: "2rem",
+                  width: "fit-content",
                 }}>
                   <input
                     type="checkbox"
