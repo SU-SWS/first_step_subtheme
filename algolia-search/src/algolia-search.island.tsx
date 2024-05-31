@@ -20,9 +20,14 @@ const Hit = ({hit}: HitsProps<StanfordHit>) => {
   return <DefaultHit hit={hit}/>
 }
 
+const PageTitle = styled.h1 `
+  margin-top: 9rem;
+`
+
 const ResultsContainer = styled.ul`
   list-style: none;
   padding-left: 0;
+  margin-bottom: 10rem;
 
   @media (min-width: 768px) {
     float: right;
@@ -71,8 +76,8 @@ const CustomHits = () => {
         </li>
       )}
       { !isLastPage && 
-        <button onClick={showMore}>
-          Load more<span className="sr-only">results</span>
+        <button onClick={showMore} className="su-button--secondary" style={{marginTop: "5rem", marginLeft: "10rem"}}>
+          Show more results
         </button>
       }
     </ResultsContainer>
@@ -99,6 +104,7 @@ const Search = () => {
 
   return (
     <div>
+      <PageTitle>Resources Directory</PageTitle>
       <InstantSearch
         searchClient={searchClient}
         indexName={searchIndex}

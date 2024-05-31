@@ -6,16 +6,18 @@ const HitContainer = styled.article`
   flex-direction: column;
   justify-content: space-between;
   gap: 4rem;
-  padding: 2rem 2rem 2rem 0;
+  // padding: 2rem 2rem 2rem 0;
+  padding: 2rem 0;
   margin-bottom: 2rem;
 
-  @media (min-width: 992px) {
+  @media (min-width: 1200px) {
     flex-direction: row;
   }
 
   img {
-    max-width: 300px;
-    max-height: 300px;
+    aspect-ratio: 2 / 1;
+    max-width: 387px;
+    max-height: 168px;
     object-fit: cover;
   }
 `
@@ -63,9 +65,11 @@ const DefaultHit = ({hit}) => {
           </div>
         }
       </DetailsContainer>
-      {hit.photo &&
+      {/* Placeholder for testing */}
+      <img src="https://picsum.photos/1000/750" alt="" />
+      {/* {hit.photo &&
         <img src={hit.photo.replace(hitUrl.origin, '')} alt=""/>
-      }
+      } */}
     </HitContainer>
   )
 }
