@@ -1,28 +1,29 @@
 import algoliasearch from 'algoliasearch/lite';
-import {createIslandWebComponent} from 'preact-island'
-import {HitsProps, InstantSearch, useInfiniteHits} from 'react-instantsearch';
+import { createIslandWebComponent } from 'preact-island';
+import { HitsProps, InstantSearch, useInfiniteHits } from 'react-instantsearch';
 import SearchForm from "./search-form";
 import EventHit from "./hits/events";
 import NewsHit from "./hits/news";
 import DefaultHit from "./hits/default-hit";
 import styled from "styled-components";
-import {StanfordHit} from "./hits/hit.types";
+import { StanfordHit } from "./hits/hit.types";
+import { SortBy } from "./sort-by";
 
-const islandName = 'algolia-search'
-const appId = window.drupalSettings?.stanfordAlgolia.appId || process.env.ALGOLIA_APP_ID
-const key = window.drupalSettings?.stanfordAlgolia.searchKey || process.env.ALGOLIA_KEY
+const islandName = 'algolia-search';
+const appId = window.drupalSettings?.stanfordAlgolia.appId || process.env.ALGOLIA_APP_ID;
+const key = window.drupalSettings?.stanfordAlgolia.searchKey || process.env.ALGOLIA_KEY;
 const searchClient = algoliasearch(appId, key);
 
-const Hit = ({hit}: HitsProps<StanfordHit>) => {
-  if (hit.type === 'Event') return <EventHit hit={hit}/>
-  if (hit.type === 'News') return <NewsHit hit={hit}/>
+const Hit = ({ hit }: HitsProps<StanfordHit>) => {
+  if (hit.type === 'Event') return <EventHit hit={hit} />;
+  if (hit.type === 'News') return <NewsHit hit={hit} />;
 
-  return <DefaultHit hit={hit}/>
-}
+  return <DefaultHit hit={hit} />;
+};
 
-const PageTitle = styled.h1 `
+const PageTitle = styled.h1`
   margin-top: 9rem;
-`
+`;
 
 const ResultsContainer = styled.ul`
   list-style: none;
@@ -34,7 +35,7 @@ const ResultsContainer = styled.ul`
     width: 66%;
     padding-left: 2rem;
   }
-`
+`;
 
 const Container = styled.div`
   li {
@@ -48,7 +49,7 @@ const Container = styled.div`
   [type=checkbox],[type=radio] {
     -webkit-clip-path: unset;
     padding: 0;
-    width:  12px;
+    width: 12px;
     height:12px;
     clip: unset;
     overflow: unset;
@@ -59,34 +60,33 @@ const Container = styled.div`
   fieldset {
     padding: 0;
   }
-`
+`;
 
 const CustomHits = () => {
   const { hits, showMore, isLastPage } = useInfiniteHits();
   if (hits.length === 0) return (
     <p>No results for your search. Please try another search.</p>
-  )
+  );
 
   // Returns results
   return (
     <ResultsContainer>
       {hits.map(hit =>
         <li key={hit.objectID}>
-          <Hit hit={hit}/>
+          <Hit hit={hit} />
         </li>
       )}
-      { !isLastPage && 
-        <button onClick={showMore} className="su-button--secondary" style={{marginTop: "5rem", marginLeft: "10rem"}}>
+      {!isLastPage &&
+        <button onClick={showMore} className="su-button--secondary" style={{ marginTop: "5rem", marginLeft: "10rem" }}>
           Show more results
         </button>
       }
     </ResultsContainer>
-  )
-}
-
+  );
+};
 
 const Search = () => {
-  const currentSearchParams = new URLSearchParams(window.location.search)
+  const currentSearchParams = new URLSearchParams(window.location.search);
 
   const initialUiState = {};
 
@@ -94,38 +94,42 @@ const Search = () => {
     initialUiState.query = currentSearchParams.get('key');
   }
   if (currentSearchParams.get("page-type")) {
-    initialUiState.refinementList = {basic_page_type: currentSearchParams.get("page-type").split(',')}
+    initialUiState.refinementList = { basic_page_type: currentSearchParams.get("page-type").split(',') };
   }
   if (currentSearchParams.get("shared")) {
-    initialUiState.refinementList = {shared_tags: currentSearchParams.get("shared").split(',')}
+    initialUiState.refinementList = { shared_tags: currentSearchParams.get("shared").split(',') };
   }
 
   const searchIndex = window.drupalSettings?.stanfordAlgolia.index || process.env.ALGOLIA_INDEX;
+  const searchIndexAsc = searchIndex + '_title_asc';
+  const searchIndexDesc = searchIndex + '_title_desc';
 
   return (
     <div>
       <PageTitle>Resources Directory</PageTitle>
       <InstantSearch
         searchClient={searchClient}
-        indexName={searchIndex}
+        indexName={searchIndexAsc}
         initialUiState={{
-          [searchIndex]: initialUiState,
+          [searchIndexAsc]: initialUiState,
         }}
-        future={{preserveSharedStateOnUnmount: true}}
-
+        future={{ preserveSharedStateOnUnmount: true }}
       >
         <Container>
-          <SearchForm/>
-          <CustomHits/>
+          <SearchForm searchIndex={searchIndex} searchIndex_asc={searchIndexAsc} searchIndex_desc={searchIndexDesc} />
+          <SortBy 
+            searchIndex={searchIndex} 
+            searchIndexAsc={searchIndexAsc} 
+            searchIndexDesc={searchIndexDesc} 
+          />
+          <CustomHits />
         </Container>
       </InstantSearch>
     </div>
+  );
+};
 
-  )
-}
-
-
-const island = createIslandWebComponent(islandName, Search)
+const island = createIslandWebComponent(islandName, Search);
 island.render({
   selector: `${islandName}, #${islandName}`,
-})
+});
