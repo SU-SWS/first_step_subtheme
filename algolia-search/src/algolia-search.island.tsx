@@ -10,8 +10,8 @@ import { StanfordHit } from "./hits/hit.types";
 import { SortBy } from "./sort-by";
 
 const islandName = 'algolia-search';
-const appId = window.drupalSettings?.stanfordAlgolia.appId || process.env.ALGOLIA_APP_ID;
-const key = window.drupalSettings?.stanfordAlgolia.searchKey || process.env.ALGOLIA_KEY;
+const appId = 'FKQ9KXS4B7';
+const key = 'b59f434249ba65222c8973874f23095a';
 const searchClient = algoliasearch(appId, key);
 
 const Hit = ({ hit }: HitsProps<StanfordHit>) => {
@@ -20,10 +20,6 @@ const Hit = ({ hit }: HitsProps<StanfordHit>) => {
 
   return <DefaultHit hit={hit} />;
 };
-
-const PageTitle = styled.h1`
-  margin-top: 9rem;
-`;
 
 const ResultsContainer = styled.ul`
   list-style: none;
@@ -70,7 +66,7 @@ const CustomHits = () => {
 
   // Returns results
   return (
-    <ResultsContainer>
+    <ResultsContainer id="results">
       {hits.map(hit =>
         <li key={hit.objectID}>
           <Hit hit={hit} />
@@ -100,13 +96,13 @@ const Search = () => {
     initialUiState.refinementList = { shared_tags: currentSearchParams.get("shared").split(',') };
   }
 
-  const searchIndex = window.drupalSettings?.stanfordAlgolia.index || process.env.ALGOLIA_INDEX;
-  const searchIndexAsc = searchIndex + '_title_asc';
-  const searchIndexDesc = searchIndex + '_title_desc';
+  const searchIndex = 'techsource_resources';
+  const searchIndexAsc = 'techsource_resources_title_asc';
+  const searchIndexDesc = 'techsource_resources_title_desc';
 
   return (
     <div>
-      <PageTitle>Resources Directory</PageTitle>
+      <a href="#results" className="visually-hidden focusable">Skip to results</a>
       <InstantSearch
         searchClient={searchClient}
         indexName={searchIndexAsc}
@@ -116,12 +112,12 @@ const Search = () => {
         future={{ preserveSharedStateOnUnmount: true }}
       >
         <Container>
-          <SearchForm searchIndex={searchIndex} searchIndex_asc={searchIndexAsc} searchIndex_desc={searchIndexDesc} />
           <SortBy 
             searchIndex={searchIndex} 
             searchIndexAsc={searchIndexAsc} 
             searchIndexDesc={searchIndexDesc} 
           />
+          <SearchForm searchIndex={searchIndex} searchIndex_asc={searchIndexAsc} searchIndex_desc={searchIndexDesc} />
           <CustomHits />
         </Container>
       </InstantSearch>
@@ -131,5 +127,5 @@ const Search = () => {
 
 const island = createIslandWebComponent(islandName, Search);
 island.render({
-  selector: `${islandName}, #${islandName}`,
+  selector: `${islandName}, #${islandName}, #resources-directory-filter`,
 });
