@@ -1,6 +1,6 @@
 import algoliasearch from 'algoliasearch/lite';
 import { createIslandWebComponent } from 'preact-island';
-import { HitsProps, InstantSearch, useInfiniteHits } from 'react-instantsearch';
+import { HitsProps, InstantSearch, useInfiniteHits, Configure } from 'react-instantsearch';
 import SearchForm from "./search-form";
 import EventHit from "./hits/events";
 import NewsHit from "./hits/news";
@@ -45,14 +45,16 @@ const Container = styled.div`
   [type=checkbox],[type=radio] {
     -webkit-clip-path: unset;
     padding: 0;
-    width: 12px;
-    height:12px;
+    width: 24px;
+    height:24px;
     clip: unset;
     overflow: unset;
     position: relative;
     clipPath: unset;
     margin-right: 8px;
+    flex-shrink: 0;
   }
+
   fieldset {
     padding: 0;
   }
@@ -73,9 +75,11 @@ const CustomHits = () => {
         </li>
       )}
       {!isLastPage &&
-        <button onClick={showMore} className="su-button--secondary" style={{ marginTop: "5rem", marginLeft: "10rem" }}>
+      <div style={{ display: 'flex' }}>
+        <button onClick={showMore} className="su-button--secondary" style={{ margin: "5rem auto" }}>
           Show more results
         </button>
+      </div>
       }
     </ResultsContainer>
   );

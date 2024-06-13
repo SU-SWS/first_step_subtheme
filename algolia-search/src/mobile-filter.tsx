@@ -10,15 +10,23 @@ const MobileFilterContainer = styled.div`
   }
 `;
 
-const ChipsContainer = styled.div`
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
+const ChipsContainer = styled.ul`
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 1.4rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid #ccc;
+`;
+
+const ChipsItem = styled.li`
+  margin-right: 1.2rem;
+  margin-bottom: 1.2rem;
 `;
 
 const ChipsButton = styled.button`
   color: #006CB8;
-  margin-right: 1.2rem;
-  margin-bottom: 1.2rem;
   border-radius: 26px;
   border: 2px solid #006CB8;
   background-color: #FFF;
@@ -104,8 +112,7 @@ const SubDropdownButton = styled.button`
 `;
 
 const DropdownContent = styled.div`
-  padding: 1rem;
-  background-color: #fff;
+  padding: 0rem 1rem 1rem 2.8rem;
 `;
 
 const MobileFilterButton = styled.button`
@@ -114,21 +121,13 @@ const MobileFilterButton = styled.button`
 `;
 
 const CheckboxLabel = styled.label`
+  margin-top: 0;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
   display: flex;
   align-items: center;
   font-size: 2rem;
   width: fit-content;
-  margin-bottom: 0.5rem;
-
-  &:first-of-type {
-    margin-top: 0;
-  }
-
-  input {
-    width: 24px;
-    height: 24px;
-    margin-right: 0.5rem;
-  }
 `;
 
 const MobileFilter = ({
@@ -189,7 +188,7 @@ const MobileFilter = ({
   return (
     <MobileFilterContainer>
       <FilterDropdownButton isOpen={isOpen} onClick={toggleOpen}>
-        Filter results
+        {isOpen ? 'Filter results by' : 'Filter results'}
         {isOpen ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -227,7 +226,9 @@ const MobileFilter = ({
           {selectedFilters.length > 0 && (
             <ChipsContainer>
               {selectedFilters.map((filter, i) => (
-                <ChipsButton key={i} onClick={() => handleChipClick(filter)}>{filter}</ChipsButton>
+                <ChipsItem key={i}>
+                  <ChipsButton onClick={() => handleChipClick(filter)}>{filter}</ChipsButton>
+                </ChipsItem>
               ))}
             </ChipsContainer>
           )}
@@ -335,7 +336,7 @@ const MobileFilter = ({
               ))}
             </DropdownContent>
           )}
-          <div style={{ display: 'flex', justifyContent: 'space-between', padding: '2.6rem 1.6rem', backgroundColor: '#F4F4F4', position: 'sticky' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', padding: '1.2rem 1.4rem', backgroundColor: '#F4F4F4' }}>
             <ResetLink href="#" onClick={handleClearAll}>Clear all filters</ResetLink>
             <MobileFilterButton onClick={handleApply}>View results</MobileFilterButton>
           </div>

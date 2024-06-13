@@ -29,15 +29,22 @@ const DesktopFilterContainer = styled.div`
   }
 `;
 
-const ChipsContainer = styled.div`
+const ChipsContainer = styled.ul`
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+const ChipsItem = styled.li`
+  margin-right: 1.2rem;
+  margin-bottom: 1.2rem;
 `;
 
 const ChipsButton = styled.button`
   color: #006CB8;
-  margin-right: 1.2rem;
-  margin-bottom: 1.2rem;
   border-radius: 26px;
   border: 2px solid #006CB8;
   background-color: #FFF;
@@ -75,6 +82,16 @@ const ResetLink = styled.a`
     text-decoration: underline;
   }
 `;
+
+const CheckboxLabel = styled.label`
+  margin-top: 0;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  width: fit-content;
+`
 
 const SearchForm = ({ searchIndex, searchIndex_asc, searchIndex_desc }) => {
   const { query, refine } = useSearchBox();
@@ -142,7 +159,9 @@ const SearchForm = ({ searchIndex, searchIndex_asc, searchIndex_desc }) => {
           <h2>Filter By</h2>
           <ChipsContainer>
             {selectedFilters.map((filter, i) => (
-              <ChipsButton key={i} onClick={() => handleChipClick(filter)}>{filter}</ChipsButton>
+              <ChipsItem key={i}>
+                <ChipsButton onClick={() => handleChipClick(filter)}>{filter}</ChipsButton>
+              </ChipsItem>
             ))}
           </ChipsContainer>
           {hasRefinedItems && <ResetLink href="#" onClick={(e) => { e.preventDefault(); formRef.current.reset(); }} className="focusable">Clear all filters</ResetLink>}
@@ -151,37 +170,42 @@ const SearchForm = ({ searchIndex, searchIndex_asc, searchIndex_desc }) => {
             <ul style={{ listStyle: "none", paddingLeft: "0", marginInline: "0" }}>
               {pageTypeRefinements.map((item, i) =>
                 <li key={i} style={{ marginBottom: "0" }}>
-                  <label style={{ marginTop: "0", paddingTop: ".6rem", paddingBottom: ".6rem", display: "flex", alignItems: "center", fontSize: "2rem", width: "fit-content" }}>
+                  <CheckboxLabel>
                     <input
                       type="checkbox"
                       onChange={() => refinePageTypes(item.value)}
                       checked={item.isRefined}
-                      style={{ width: "24px", height: "24px", flexShrink: "0" }}
+                      // style={{ width: "24px", height: "24px", flexShrink: "0" }}
                     />
                     <div style={{ marginTop: "1px" }}>
                       {item.value} ({item.count})
                     </div>
-                  </label>
+                  </CheckboxLabel>
+                  {/* <label style={{ marginTop: "0", paddingTop: ".6rem", paddingBottom: ".6rem", display: "flex", alignItems: "center", fontSize: "2rem", width: "fit-content" }}>
+                  </label> */}
                 </li>
               )}
             </ul>
           </fieldset>
           <fieldset style={{ marginTop: "2rem", marginBottom: "10rem" }}>
+            {/* <legend style={{fontSize: "2.4rem"}}>Allowed Users</legend> */}
             <legend style={{ fontSize: "2.4rem" }}>Available to</legend>
             <ul style={{ listStyle: "none", paddingLeft: "0", marginInline: "0" }}>
               {sharedRefinements.map((item, i) =>
                 <li key={`shared-i`} style={{ marginBottom: "0" }}>
-                  <label style={{ marginTop: "0", paddingTop: ".6rem", paddingBottom: ".6rem", display: "flex", alignItems: "center", fontSize: "2rem", width: "fit-content" }}>
+                  <CheckboxLabel>
                     <input
                       type="checkbox"
                       onChange={() => refineSharedTypes(item.value)}
                       checked={item.isRefined}
-                      style={{ width: "24px", height: "24px", flexShrink: "0" }}
+                      // style={{ width: "24px", height: "24px", flexShrink: "0" }}
                     />
                     <div style={{ marginTop: "1px" }}>
                       {item.value} ({item.count})
                     </div>
-                  </label>
+                  </CheckboxLabel>
+                  {/* <label style={{ marginTop: "0", paddingTop: ".6rem", paddingBottom: ".6rem", display: "flex", alignItems: "center", fontSize: "2rem", width: "fit-content" }}>
+                  </label> */}
                 </li>
               )}
             </ul>
