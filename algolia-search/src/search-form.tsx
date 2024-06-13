@@ -127,7 +127,8 @@ const SearchForm = ({ searchIndex, searchIndex_asc, searchIndex_desc }) => {
 
   const formRef = useRef(null);
 
-  const handleChipClick = (filter) => {
+  const handleChipClick = (e, filter) => {
+    e.preventDefault();
     const pageTypeItem = pageTypeRefinements.find(item => item.value === filter);
     const sharedItem = sharedRefinements.find(item => item.value === filter);
 
@@ -160,7 +161,7 @@ const SearchForm = ({ searchIndex, searchIndex_asc, searchIndex_desc }) => {
           <ChipsContainer>
             {selectedFilters.map((filter, i) => (
               <ChipsItem key={i}>
-                <ChipsButton onClick={() => handleChipClick(filter)}>{filter}</ChipsButton>
+                <ChipsButton onClick={(e) => handleChipClick(e, filter)}>{filter}</ChipsButton>
               </ChipsItem>
             ))}
           </ChipsContainer>
@@ -175,37 +176,30 @@ const SearchForm = ({ searchIndex, searchIndex_asc, searchIndex_desc }) => {
                       type="checkbox"
                       onChange={() => refinePageTypes(item.value)}
                       checked={item.isRefined}
-                      // style={{ width: "24px", height: "24px", flexShrink: "0" }}
                     />
                     <div style={{ marginTop: "1px" }}>
                       {item.value} ({item.count})
                     </div>
                   </CheckboxLabel>
-                  {/* <label style={{ marginTop: "0", paddingTop: ".6rem", paddingBottom: ".6rem", display: "flex", alignItems: "center", fontSize: "2rem", width: "fit-content" }}>
-                  </label> */}
                 </li>
               )}
             </ul>
           </fieldset>
           <fieldset style={{ marginTop: "2rem", marginBottom: "10rem" }}>
-            {/* <legend style={{fontSize: "2.4rem"}}>Allowed Users</legend> */}
             <legend style={{ fontSize: "2.4rem" }}>Available to</legend>
             <ul style={{ listStyle: "none", paddingLeft: "0", marginInline: "0" }}>
               {sharedRefinements.map((item, i) =>
-                <li key={`shared-i`} style={{ marginBottom: "0" }}>
+                <li key={`shared-${i}`} style={{ marginBottom: "0" }}>
                   <CheckboxLabel>
                     <input
                       type="checkbox"
                       onChange={() => refineSharedTypes(item.value)}
                       checked={item.isRefined}
-                      // style={{ width: "24px", height: "24px", flexShrink: "0" }}
                     />
                     <div style={{ marginTop: "1px" }}>
                       {item.value} ({item.count})
                     </div>
                   </CheckboxLabel>
-                  {/* <label style={{ marginTop: "0", paddingTop: ".6rem", paddingBottom: ".6rem", display: "flex", alignItems: "center", fontSize: "2rem", width: "fit-content" }}>
-                  </label> */}
                 </li>
               )}
             </ul>
