@@ -31,6 +31,14 @@ const ResultsContainer = styled.ul`
     width: 66%;
     padding-left: 2rem;
   }
+
+  li {
+    border-bottom: 1px solid #ccc;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
 `;
 
 const Container = styled.div`
