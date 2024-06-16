@@ -1,6 +1,6 @@
 import algoliasearch from 'algoliasearch/lite';
 import { createIslandWebComponent } from 'preact-island';
-import { HitsProps, InstantSearch, useInfiniteHits, Configure } from 'react-instantsearch';
+import { HitsProps, InstantSearch, useInfiniteHits, Configure, useInstantSearch } from 'react-instantsearch';
 import SearchForm from "./search-form";
 import EventHit from "./hits/events";
 import NewsHit from "./hits/news";
@@ -68,11 +68,24 @@ const Container = styled.div`
   }
 `;
 
+const LoadingIndicator = styled.div`
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.5rem;
+  color: #006CB8;
+`;
+
 const CustomHits = () => {
   const { hits, showMore, isLastPage } = useInfiniteHits();
-  if (hits.length === 0) return (
-    <p>No results for your search. Please try another search.</p>
-  );
+  const { status } = useInstantSearch();
+
+  if (status === 'loading') {
+    return <LoadingIndicator>Loading...</LoadingIndicator>;
+  }
+
+  if (hits.length === 0) {
+    return <p>No results for your search. Please try another search.</p>;
+  }
 
   // Returns results
   return (

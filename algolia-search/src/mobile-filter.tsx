@@ -112,8 +112,10 @@ const SubDropdownButton = styled.button`
   }
 `;
 
-const DropdownContent = styled.div`
+const DropdownContent = styled.ul`
   padding: 0rem 1rem 1rem 2.8rem;
+  margin: 0;
+  list-style: none;
 `;
 
 const MobileFilterButton = styled.button`
@@ -183,7 +185,6 @@ const MobileFilter = ({
   const handleApply = (e) => {
     e.preventDefault();
     setIsOpen(false);
-    document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -228,7 +229,7 @@ const MobileFilter = ({
             <ChipsContainer>
               {selectedFilters.map((filter, i) => (
                 <ChipsItem key={i}>
-                  <ChipsButton onClick={(e) => handleChipClick(e, filter)}>{filter}</ChipsButton>
+                  <ChipsButton onClick={(e) => handleChipClick(e, filter)} aria-label={`Clear ${filter} filter`}>{filter}</ChipsButton>
                 </ChipsItem>
               ))}
             </ChipsContainer>
@@ -274,14 +275,18 @@ const MobileFilter = ({
           {resourcesOpen && (
             <DropdownContent>
               {pageTypeRefinements.map((item, i) => (
-                <CheckboxLabel key={i}>
-                  <input
-                    type="checkbox"
-                    onChange={() => handleCheckboxChange(refinePageTypes, item)}
-                    checked={item.isRefined}
-                  />{" "}
-                  {item.value} ({item.count})
-                </CheckboxLabel>
+                <li key={i} style={{ marginBottom: '0' }}>
+                  <CheckboxLabel>
+                    <input
+                      type="checkbox"
+                      onChange={() => handleCheckboxChange(refinePageTypes, item)}
+                      checked={item.isRefined}
+                    />
+                    <div style={{ marginTop: '1px' }}>
+                      {item.value} ({item.count})
+                    </div>
+                  </CheckboxLabel>
+                </li>
               ))}
             </DropdownContent>
           )}
@@ -326,14 +331,18 @@ const MobileFilter = ({
           {usersOpen && (
             <DropdownContent>
               {sharedRefinements.map((item, i) => (
-                <CheckboxLabel key={i}>
-                  <input
-                    type="checkbox"
-                    onChange={() => handleCheckboxChange(refineSharedTypes, item)}
-                    checked={item.isRefined}
-                  />{" "}
-                  {item.value} ({item.count})
-                </CheckboxLabel>
+                <li key={i} style={{ marginBottom: '0' }}>
+                  <CheckboxLabel>
+                    <input
+                      type="checkbox"
+                      onChange={() => handleCheckboxChange(refineSharedTypes, item)}
+                      checked={item.isRefined}
+                    />
+                    <div style={{ marginTop: '1px' }}>
+                      {item.value} ({item.count})
+                    </div>
+                  </CheckboxLabel>
+                </li>
               ))}
             </DropdownContent>
           )}

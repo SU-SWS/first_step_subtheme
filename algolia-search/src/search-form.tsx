@@ -161,7 +161,7 @@ const SearchForm = ({ searchIndex, searchIndex_asc, searchIndex_desc }) => {
           <ChipsContainer>
             {selectedFilters.map((filter, i) => (
               <ChipsItem key={i}>
-                <ChipsButton onClick={(e) => handleChipClick(e, filter)}>{filter}</ChipsButton>
+                <ChipsButton onClick={(e) => handleChipClick(e, filter)} aria-label={`Clear ${filter} filter`}>{filter}</ChipsButton>
               </ChipsItem>
             ))}
           </ChipsContainer>
