@@ -14,34 +14,42 @@ const appId = 'FKQ9KXS4B7';
 const key = 'b59f434249ba65222c8973874f23095a';
 const searchClient = algoliasearch(appId, key);
 
-const Hit = ({ hit }: HitsProps<StanfordHit>) => {
+const Hit: React.FC<{ hit: StanfordHit }> = ({ hit }) => {
   if (hit.type === 'Event') return <EventHit hit={hit} />;
   if (hit.type === 'News') return <NewsHit hit={hit} />;
-
   return <DefaultHit hit={hit} />;
 };
 
 const ResultsContainer = styled.ul`
   list-style: none;
   padding-left: 0;
+  margin-top: 5rem;
   margin-bottom: 10rem;
 
   @media (min-width: 768px) {
-    float: right;
-    width: 66%;
-    padding-left: 2rem;
+    padding-left: 6rem;
+  }
+
+  @media (min-width: 1200px) {
+    padding-left: 0;
   }
 
   li {
     border-bottom: 1px solid #ccc;
 
-    &:last-child {
+    &:last-of-type {
       border-bottom: none;
     }
   }
 `;
 
 const Container = styled.div`
+
+  @media (min-width: 768px) {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+  }
+
   li {
     margin-bottom: 10px;
 
@@ -54,11 +62,11 @@ const Container = styled.div`
     -webkit-clip-path: unset;
     padding: 0;
     width: 24px;
-    height:24px;
+    height: 24px;
     clip: unset;
     overflow: unset;
     position: relative;
-    clipPath: unset;
+    clip-path: unset;
     margin-right: 8px;
     flex-shrink: 0;
   }
@@ -75,8 +83,8 @@ const LoadingIndicator = styled.div`
   color: #006CB8;
 `;
 
-const CustomHits = () => {
-  const { hits, showMore, isLastPage } = useInfiniteHits();
+const CustomHits: React.FC = () => {
+  const { hits, showMore, isLastPage } = useInfiniteHits<StanfordHit>();
   const { status } = useInstantSearch();
 
   if (status === 'loading') {
@@ -87,38 +95,36 @@ const CustomHits = () => {
     return <p>No results for your search. Please try another search.</p>;
   }
 
-  // Returns results
   return (
     <ResultsContainer id="results">
-      {hits.map(hit =>
+      {hits.map(hit => (
         <li key={hit.objectID}>
           <Hit hit={hit} />
         </li>
+      ))}
+      {!isLastPage && (
+        <div style={{ display: 'flex' }}>
+          <button onClick={showMore} className="su-button--secondary" style={{ margin: '5rem auto' }}>
+            Show more results
+          </button>
+        </div>
       )}
-      {!isLastPage &&
-      <div style={{ display: 'flex' }}>
-        <button onClick={showMore} className="su-button--secondary" style={{ margin: "5rem auto" }}>
-          Show more results
-        </button>
-      </div>
-      }
     </ResultsContainer>
   );
 };
 
-const Search = () => {
+const Search: React.FC = () => {
   const currentSearchParams = new URLSearchParams(window.location.search);
-
-  const initialUiState = {};
+  const initialUiState: any = {};
 
   if (currentSearchParams.get('key')) {
     initialUiState.query = currentSearchParams.get('key');
   }
-  if (currentSearchParams.get("page-type")) {
-    initialUiState.refinementList = { basic_page_type: currentSearchParams.get("page-type").split(',') };
+  if (currentSearchParams.get('page-type')) {
+    initialUiState.refinementList = { basic_page_type: currentSearchParams.get('page-type')?.split(',') };
   }
-  if (currentSearchParams.get("shared")) {
-    initialUiState.refinementList = { shared_tags: currentSearchParams.get("shared").split(',') };
+  if (currentSearchParams.get('shared')) {
+    initialUiState.refinementList = { shared_tags: currentSearchParams.get('shared')?.split(',') };
   }
 
   const searchIndex = 'techsource_resources';
@@ -126,8 +132,8 @@ const Search = () => {
   const searchIndexDesc = 'techsource_resources_title_desc';
 
   return (
-    <div>
-      <a href="#results" className="visually-hidden focusable">Skip to results</a>
+    <>
+      <a href="#results" className="visually-hidden">Skip to results</a>
       <InstantSearch
         searchClient={searchClient}
         indexName={searchIndexAsc}
@@ -137,16 +143,14 @@ const Search = () => {
         future={{ preserveSharedStateOnUnmount: true }}
       >
         <Container>
-          <SortBy 
-            searchIndex={searchIndex} 
-            searchIndexAsc={searchIndexAsc} 
-            searchIndexDesc={searchIndexDesc} 
-          />
-          <SearchForm searchIndex={searchIndex} searchIndex_asc={searchIndexAsc} searchIndex_desc={searchIndexDesc} />
-          <CustomHits />
+          <SearchForm searchIndex={searchIndex} searchIndexAsc={searchIndexAsc} searchIndexDesc={searchIndexDesc} />
+          <div>
+            <SortBy searchIndex={searchIndex} searchIndexAsc={searchIndexAsc} searchIndexDesc={searchIndexDesc} />
+            <CustomHits />
+          </div>
         </Container>
       </InstantSearch>
-    </div>
+    </>
   );
 };
 

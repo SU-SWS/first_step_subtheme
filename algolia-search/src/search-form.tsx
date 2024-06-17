@@ -1,31 +1,14 @@
 import styled from "styled-components";
-import {
-  useRefinementList,
-  useSearchBox
-} from "react-instantsearch";
+import { useRefinementList, useSearchBox } from "react-instantsearch";
 import { useEffect, useRef, useState } from "preact/compat";
 import MobileFilter from './mobile-filter';
 
-const FilterContainer = styled.div`
-  margin-top: 39px;
-
-  @media (min-width: 576px) {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 6rem;
-  }
-
+const DesktopFilter = styled.div`
+  display: none;
+    
   @media (min-width: 768px) {
     display: block;
-    float: left;
-    width: 33%;
-    padding-right: 2rem;
-  }
-`;
-
-const DesktopFilterContainer = styled.div`
-  @media (max-width: 767px) {
-    display: none;
+    margin-top: 9.8rem;
   }
 `;
 
@@ -91,9 +74,15 @@ const CheckboxLabel = styled.label`
   align-items: center;
   font-size: 2rem;
   width: fit-content;
-`
+`;
 
-const SearchForm = ({ searchIndex, searchIndex_asc, searchIndex_desc }) => {
+interface SearchFormProps {
+  searchIndex: string;
+  searchIndexAsc: string;
+  searchIndexDesc: string;
+}
+
+const SearchForm: React.FC<SearchFormProps> = ({ searchIndex, searchIndexAsc, searchIndexDesc }) => {
   const { query, refine } = useSearchBox();
   const { items: pageTypeRefinements, refine: refinePageTypes } = useRefinementList({
     attribute: "basic_page_type",
@@ -105,7 +94,7 @@ const SearchForm = ({ searchIndex, searchIndex_asc, searchIndex_desc }) => {
     sortBy: ["name:asc"]
   });
 
-  const [selectedFilters, setSelectedFilters] = useState([]);
+  const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const hasRefinedItems = pageTypeRefinements.some(item => item.isRefined) || sharedRefinements.some(item => item.isRefined);
 
   useEffect(() => {
@@ -125,9 +114,9 @@ const SearchForm = ({ searchIndex, searchIndex_asc, searchIndex_desc }) => {
     setSelectedFilters([...pageTypes, ...sharedTypes]);
   }, [query, pageTypeRefinements, sharedRefinements]);
 
-  const formRef = useRef(null);
+  const formRef = useRef<HTMLFormElement>(null);
 
-  const handleChipClick = (e, filter) => {
+  const handleChipClick = (e: React.MouseEvent<HTMLButtonElement>, filter: string) => {
     e.preventDefault();
     const pageTypeItem = pageTypeRefinements.find(item => item.value === filter);
     const sharedItem = sharedRefinements.find(item => item.value === filter);
@@ -145,67 +134,67 @@ const SearchForm = ({ searchIndex, searchIndex_asc, searchIndex_desc }) => {
   return (
     <form
       ref={formRef}
-      role="search"
       onReset={(e) => {
+        e.preventDefault();
         pageTypeRefinements.map(refinementItem => {
           if (refinementItem.isRefined) refinePageTypes(refinementItem.value);
         });
         sharedRefinements.map(refinementItem => {
           if (refinementItem.isRefined) refineSharedTypes(refinementItem.value);
         });
+        setSelectedFilters([]);
       }}
+      aria-label="Filter Form"
     >
-      <DesktopFilterContainer>
-        <FilterContainer>
-          <h2>Filter By</h2>
-          <ChipsContainer>
-            {selectedFilters.map((filter, i) => (
-              <ChipsItem key={i}>
-                <ChipsButton onClick={(e) => handleChipClick(e, filter)} aria-label={`Clear ${filter} filter`}>{filter}</ChipsButton>
-              </ChipsItem>
-            ))}
-          </ChipsContainer>
-          {hasRefinedItems && <ResetLink href="#" onClick={(e) => { e.preventDefault(); formRef.current.reset(); }} className="focusable">Clear all filters</ResetLink>}
-          <fieldset style={{ marginTop: "2rem" }}>
-            <legend style={{ fontSize: "2.4rem" }}>Resources</legend>
-            <ul style={{ listStyle: "none", paddingLeft: "0", marginInline: "0" }}>
-              {pageTypeRefinements.map((item, i) =>
-                <li key={i} style={{ marginBottom: "0" }}>
-                  <CheckboxLabel>
-                    <input
-                      type="checkbox"
-                      onChange={() => refinePageTypes(item.value)}
-                      checked={item.isRefined}
-                    />
-                    <div style={{ marginTop: "1px" }}>
-                      {item.value} ({item.count})
-                    </div>
-                  </CheckboxLabel>
-                </li>
-              )}
-            </ul>
-          </fieldset>
-          <fieldset style={{ marginTop: "2rem", marginBottom: "10rem" }}>
-            <legend style={{ fontSize: "2.4rem" }}>Available to</legend>
-            <ul style={{ listStyle: "none", paddingLeft: "0", marginInline: "0" }}>
-              {sharedRefinements.map((item, i) =>
-                <li key={`shared-${i}`} style={{ marginBottom: "0" }}>
-                  <CheckboxLabel>
-                    <input
-                      type="checkbox"
-                      onChange={() => refineSharedTypes(item.value)}
-                      checked={item.isRefined}
-                    />
-                    <div style={{ marginTop: "1px" }}>
-                      {item.value} ({item.count})
-                    </div>
-                  </CheckboxLabel>
-                </li>
-              )}
-            </ul>
-          </fieldset>
-        </FilterContainer>
-      </DesktopFilterContainer>
+      <DesktopFilter>
+        <h2>Filter By</h2>
+        <ChipsContainer>
+          {selectedFilters.map((filter, i) => (
+            <ChipsItem key={i}>
+              <ChipsButton onClick={(e) => handleChipClick(e, filter)} aria-label={`Clear ${filter} filter`}>{filter}</ChipsButton>
+            </ChipsItem>
+          ))}
+        </ChipsContainer>
+        {hasRefinedItems && <ResetLink href="#" onClick={(e) => { e.preventDefault(); formRef.current?.reset(); }} className="focusable">Clear all filters</ResetLink>}
+        <fieldset style={{ marginTop: "2rem" }}>
+          <legend style={{ fontSize: "2.4rem" }}>Resources</legend>
+          <ul style={{ listStyle: "none", paddingLeft: "0", marginInline: "0" }}>
+            {pageTypeRefinements.map((item, i) =>
+              <li key={i} style={{ marginBottom: "0" }}>
+                <CheckboxLabel>
+                  <input
+                    type="checkbox"
+                    onChange={() => refinePageTypes(item.value)}
+                    checked={item.isRefined}
+                  />
+                  <div style={{ marginTop: "1px" }}>
+                    {item.value} ({item.count})
+                  </div>
+                </CheckboxLabel>
+              </li>
+            )}
+          </ul>
+        </fieldset>
+        <fieldset style={{ marginTop: "2rem", marginBottom: "10rem" }}>
+          <legend style={{ fontSize: "2.4rem" }}>Available to</legend>
+          <ul style={{ listStyle: "none", paddingLeft: "0", marginInline: "0" }}>
+            {sharedRefinements.map((item, i) =>
+              <li key={`shared-${i}`} style={{ marginBottom: "0" }}>
+                <CheckboxLabel>
+                  <input
+                    type="checkbox"
+                    onChange={() => refineSharedTypes(item.value)}
+                    checked={item.isRefined}
+                  />
+                  <div style={{ marginTop: "1px" }}>
+                    {item.value} ({item.count})
+                  </div>
+                </CheckboxLabel>
+              </li>
+            )}
+          </ul>
+        </fieldset>
+      </DesktopFilter>
       <MobileFilter 
         pageTypeRefinements={pageTypeRefinements}
         refinePageTypes={refinePageTypes}

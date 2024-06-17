@@ -2,9 +2,6 @@ import styled from "styled-components";
 import { useState } from "preact/compat";
 
 const MobileFilterContainer = styled.div`
-  margin-top: 39px;
-  border: 1px solid #d2d3d4;
-
   @media (min-width: 768px) {
     display: none;
   }
@@ -67,10 +64,9 @@ const ResetLink = styled.a`
   }
 `;
 
-const FilterDropdownButton = styled.button`
+const FilterDropdownButton = styled.button<{ isOpen: boolean }>`
   width: 100%;
-  border: 1px solid #ccc;
-  border-bottom: ${({ isOpen }) => (isOpen ? '0' : '1px solid #ccc')};
+  border: 1px solid #B1040E;
   padding: 1.2rem 1.4rem;
   background-color: ${({ isOpen }) => (isOpen ? '#B1040E' : '#fff')};
   display: flex;
@@ -133,7 +129,17 @@ const CheckboxLabel = styled.label`
   width: fit-content;
 `;
 
-const MobileFilter = ({
+interface MobileFilterProps {
+  pageTypeRefinements: any;
+  refinePageTypes: (value: string) => void;
+  sharedRefinements: any;
+  refineSharedTypes: (value: string) => void;
+  selectedFilters: string[];
+  setSelectedFilters: (filters: string[]) => void;
+  handleChipClick: (e: React.MouseEvent<HTMLButtonElement>, filter: string) => void;
+}
+
+const MobileFilter: React.FC<MobileFilterProps> = ({
   pageTypeRefinements,
   refinePageTypes,
   sharedRefinements,
@@ -144,28 +150,28 @@ const MobileFilter = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [resourcesOpen, setResourcesOpen] = useState(
-    pageTypeRefinements.some(item => item.isRefined)
+    pageTypeRefinements.some((item: any) => item.isRefined)
   );
   const [usersOpen, setUsersOpen] = useState(
-    sharedRefinements.some(item => item.isRefined)
+    sharedRefinements.some((item: any) => item.isRefined)
   );
 
-  const toggleOpen = (e) => {
+  const toggleOpen = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsOpen(!isOpen);
   };
 
-  const toggleResourcesOpen = (e) => {
+  const toggleResourcesOpen = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setResourcesOpen(!resourcesOpen);
   };
 
-  const toggleUsersOpen = (e) => {
+  const toggleUsersOpen = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setUsersOpen(!usersOpen);
   };
 
-  const handleCheckboxChange = (refineFn, item) => {
+  const handleCheckboxChange = (refineFn: (value: string) => void, item: any) => {
     const isSelected = selectedFilters.includes(item.value);
     if (isSelected) {
       setSelectedFilters(selectedFilters.filter(filter => filter !== item.value));
@@ -175,14 +181,14 @@ const MobileFilter = ({
     refineFn(item.value);
   };
 
-  const handleClearAll = (e) => {
+  const handleClearAll = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     setSelectedFilters([]);
-    pageTypeRefinements.forEach(item => item.isRefined && refinePageTypes(item.value));
-    sharedRefinements.forEach(item => item.isRefined && refineSharedTypes(item.value));
+    pageTypeRefinements.forEach((item: any) => item.isRefined && refinePageTypes(item.value));
+    sharedRefinements.forEach((item: any) => item.isRefined && refineSharedTypes(item.value));
   };
 
-  const handleApply = (e) => {
+  const handleApply = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsOpen(false);
   };
@@ -224,7 +230,7 @@ const MobileFilter = ({
         )}
       </FilterDropdownButton>
       {isOpen && (
-        <div>
+        <div style={{ border: '1px solid #d2d3d4', borderTop: '0' }}>
           {selectedFilters.length > 0 && (
             <ChipsContainer>
               {selectedFilters.map((filter, i) => (
@@ -274,7 +280,7 @@ const MobileFilter = ({
           </SubDropdownButton>
           {resourcesOpen && (
             <DropdownContent>
-              {pageTypeRefinements.map((item, i) => (
+              {pageTypeRefinements.map((item: any, i: number) => (
                 <li key={i} style={{ marginBottom: '0' }}>
                   <CheckboxLabel>
                     <input
@@ -330,7 +336,7 @@ const MobileFilter = ({
           </SubDropdownButton>
           {usersOpen && (
             <DropdownContent>
-              {sharedRefinements.map((item, i) => (
+              {sharedRefinements.map((item: any, i: number) => (
                 <li key={i} style={{ marginBottom: '0' }}>
                   <CheckboxLabel>
                     <input

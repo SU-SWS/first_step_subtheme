@@ -6,12 +6,15 @@ const HitContainer = styled.article`
   flex-direction: column;
   justify-content: space-between;
   gap: 4rem;
-  // padding: 2rem 2rem 2rem 0;
   padding: 2rem 0;
   margin-bottom: 2rem;
 
   @media (min-width: 1200px) {
     flex-direction: row;
+  }
+
+  &:first-of-type {
+    padding-top: 0;
   }
 
   img {
