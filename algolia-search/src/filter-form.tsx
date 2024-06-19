@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import { useRefinementList, useSearchBox } from "react-instantsearch";
 import { useEffect, useRef, useState } from "preact/compat";
+import { FunctionComponent, JSX } from 'preact';
 import MobileFilter from './mobile-filter';
 
-const DesktopFilter = styled.div`
+const DesktopFilter = styled.div<{ children?: preact.ComponentChildren }>`
   display: none;
     
   @media (min-width: 768px) {
@@ -12,7 +13,7 @@ const DesktopFilter = styled.div`
   }
 `;
 
-const ChipsContainer = styled.ul`
+const ChipsContainer = styled.ul<{ children?: preact.ComponentChildren }>`
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
   list-style: none;
@@ -21,12 +22,12 @@ const ChipsContainer = styled.ul`
   flex-wrap: wrap;
 `;
 
-const ChipsItem = styled.li`
+const ChipsItem = styled.li<{ children?: preact.ComponentChildren }>`
   margin-right: 1.2rem;
   margin-bottom: 1.2rem;
 `;
 
-const ChipsButton = styled.button`
+const ChipsButton = styled.button<{ children?: preact.ComponentChildren }>`
   color: #006CB8;
   border-radius: 26px;
   border: 2px solid #006CB8;
@@ -52,7 +53,7 @@ const ChipsButton = styled.button`
   }
 `;
 
-const ResetLink = styled.a`
+const ResetLink = styled.a<{ children?: preact.ComponentChildren }>`
   display: inline-block;
   margin-top: 2.6rem;
   cursor: pointer;
@@ -66,7 +67,7 @@ const ResetLink = styled.a`
   }
 `;
 
-const CheckboxLabel = styled.label`
+const CheckboxLabel = styled.label<{ children?: preact.ComponentChildren }>`
   margin-top: 0;
   padding-top: 0.6rem;
   padding-bottom: 0.6rem;
@@ -76,13 +77,13 @@ const CheckboxLabel = styled.label`
   width: fit-content;
 `;
 
-interface SearchFormProps {
+interface FilterFormProps {
   searchIndex: string;
   searchIndexAsc: string;
   searchIndexDesc: string;
 }
 
-const SearchForm: React.FC<SearchFormProps> = ({ searchIndex, searchIndexAsc, searchIndexDesc }) => {
+const FilterForm: FunctionComponent<FilterFormProps> = ({ searchIndex, searchIndexAsc, searchIndexDesc }) => {
   const { query, refine } = useSearchBox();
   const { items: pageTypeRefinements, refine: refinePageTypes } = useRefinementList({
     attribute: "basic_page_type",
@@ -116,7 +117,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ searchIndex, searchIndexAsc, se
 
   const formRef = useRef<HTMLFormElement>(null);
 
-  const handleChipClick = (e: React.MouseEvent<HTMLButtonElement>, filter: string) => {
+  const handleChipClick = (e: JSX.TargetedMouseEvent<HTMLButtonElement>, filter: string) => {
     e.preventDefault();
     const pageTypeItem = pageTypeRefinements.find(item => item.value === filter);
     const sharedItem = sharedRefinements.find(item => item.value === filter);
@@ -151,7 +152,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ searchIndex, searchIndexAsc, se
         <ChipsContainer>
           {selectedFilters.map((filter, i) => (
             <ChipsItem key={i}>
-              <ChipsButton onClick={(e) => handleChipClick(e, filter)} aria-label={`Clear ${filter} filter`}>{filter}</ChipsButton>
+              <ChipsButton onClick={(e: JSX.TargetedMouseEvent<HTMLButtonElement>) => handleChipClick(e, filter)} aria-label={`Clear ${filter} filter`}>{filter}</ChipsButton>
             </ChipsItem>
           ))}
         </ChipsContainer>
@@ -208,4 +209,4 @@ const SearchForm: React.FC<SearchFormProps> = ({ searchIndex, searchIndexAsc, se
   );
 };
 
-export default SearchForm;
+export default FilterForm;

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {Highlight, Snippet} from "react-instantsearch";
 
-const HitContainer = styled.article`
+const HitContainer: React.FC = styled.article`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -31,7 +31,7 @@ const DetailsContainer = styled.div`
   justify-content: space-between;
 `
 
-const DefaultHit = ({hit}) => {
+const DefaultHit: React.FC<{ hit: any }> = ({ hit }) => {
   const hitUrl = new URL(hit.url);
 
   return (

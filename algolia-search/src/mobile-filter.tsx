@@ -1,13 +1,14 @@
+import { h, FunctionComponent, JSX } from 'preact';
 import styled from "styled-components";
 import { useState } from "preact/compat";
 
-const MobileFilterContainer = styled.div`
+const MobileFilterContainer = styled.div<{ children?: preact.ComponentChildren }>`
   @media (min-width: 768px) {
     display: none;
   }
 `;
 
-const ChipsContainer = styled.ul`
+const ChipsContainer = styled.ul<{ children?: preact.ComponentChildren }>`
   list-style: none;
   display: flex;
   flex-wrap: wrap;
@@ -17,12 +18,12 @@ const ChipsContainer = styled.ul`
   border-bottom: 1px solid #ccc;
 `;
 
-const ChipsItem = styled.li`
+const ChipsItem = styled.li<{ children?: preact.ComponentChildren }>`
   margin-right: 1.2rem;
   margin-bottom: 1.2rem;
 `;
 
-const ChipsButton = styled.button`
+const ChipsButton = styled.button<{ children?: preact.ComponentChildren }>`
   color: #006CB8;
   border-radius: 26px;
   border: 2px solid #006CB8;
@@ -49,7 +50,7 @@ const ChipsButton = styled.button`
   }
 `;
 
-const ResetLink = styled.a`
+const ResetLink = styled.a<{ children?: preact.ComponentChildren }>`
   text-decoration: none;
   color: #B1040E;
   align-self: center;
@@ -64,7 +65,7 @@ const ResetLink = styled.a`
   }
 `;
 
-const FilterDropdownButton = styled.button<{ isOpen: boolean }>`
+const FilterDropdownButton = styled.button<{ isOpen: boolean; children?: preact.ComponentChildren }>`
   width: 100%;
   border: 1px solid #B1040E;
   padding: 1.2rem 1.4rem;
@@ -87,7 +88,7 @@ const FilterDropdownButton = styled.button<{ isOpen: boolean }>`
   }
 `;
 
-const SubDropdownButton = styled.button`
+const SubDropdownButton = styled.button<{ children?: preact.ComponentChildren }>`
   width: 100%;
   border: none;
   padding: 1.2rem 1.4rem;
@@ -108,18 +109,18 @@ const SubDropdownButton = styled.button`
   }
 `;
 
-const DropdownContent = styled.ul`
+const DropdownContent = styled.ul<{ children?: preact.ComponentChildren }>`
   padding: 0rem 1rem 1rem 2.8rem;
   margin: 0;
   list-style: none;
 `;
 
-const MobileFilterButton = styled.button`
+const MobileFilterButton = styled.button<{ children?: preact.ComponentChildren }>`
   display: block;
   width: auto;
 `;
 
-const CheckboxLabel = styled.label`
+const CheckboxLabel = styled.label<{ children?: preact.ComponentChildren }>`
   margin-top: 0;
   padding-top: 0.6rem;
   padding-bottom: 0.6rem;
@@ -136,10 +137,10 @@ interface MobileFilterProps {
   refineSharedTypes: (value: string) => void;
   selectedFilters: string[];
   setSelectedFilters: (filters: string[]) => void;
-  handleChipClick: (e: React.MouseEvent<HTMLButtonElement>, filter: string) => void;
+  handleChipClick: (e: JSX.TargetedMouseEvent<HTMLButtonElement>, filter: string) => void;
 }
 
-const MobileFilter: React.FC<MobileFilterProps> = ({
+const MobileFilter: FunctionComponent<MobileFilterProps> = ({
   pageTypeRefinements,
   refinePageTypes,
   sharedRefinements,
@@ -156,17 +157,17 @@ const MobileFilter: React.FC<MobileFilterProps> = ({
     sharedRefinements.some((item: any) => item.isRefined)
   );
 
-  const toggleOpen = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const toggleOpen: JSX.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
     setIsOpen(!isOpen);
   };
 
-  const toggleResourcesOpen = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const toggleResourcesOpen: JSX.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
     setResourcesOpen(!resourcesOpen);
   };
 
-  const toggleUsersOpen = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const toggleUsersOpen: JSX.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
     setUsersOpen(!usersOpen);
   };
@@ -181,14 +182,14 @@ const MobileFilter: React.FC<MobileFilterProps> = ({
     refineFn(item.value);
   };
 
-  const handleClearAll = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleClearAll: JSX.MouseEventHandler<HTMLAnchorElement> = (e) => {
     e.preventDefault();
     setSelectedFilters([]);
     pageTypeRefinements.forEach((item: any) => item.isRefined && refinePageTypes(item.value));
     sharedRefinements.forEach((item: any) => item.isRefined && refineSharedTypes(item.value));
   };
 
-  const handleApply = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleApply: JSX.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
     setIsOpen(false);
   };

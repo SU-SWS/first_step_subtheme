@@ -1,26 +1,27 @@
 import algoliasearch from 'algoliasearch/lite';
 import { createIslandWebComponent } from 'preact-island';
 import { HitsProps, InstantSearch, useInfiniteHits, Configure, useInstantSearch } from 'react-instantsearch';
-import SearchForm from "./search-form";
+import FilterForm from "./filter-form";
 import EventHit from "./hits/events";
 import NewsHit from "./hits/news";
 import DefaultHit from "./hits/default-hit";
 import styled from "styled-components";
 import { StanfordHit } from "./hits/hit.types";
 import { SortBy } from "./sort-by";
+import { FunctionComponent } from 'preact';
 
 const islandName = 'algolia-search';
 const appId = 'FKQ9KXS4B7';
 const key = 'b59f434249ba65222c8973874f23095a';
 const searchClient = algoliasearch(appId, key);
 
-const Hit: React.FC<{ hit: StanfordHit }> = ({ hit }) => {
+const Hit: FunctionComponent<{ hit: StanfordHit }> = ({ hit }) => {
   if (hit.type === 'Event') return <EventHit hit={hit} />;
   if (hit.type === 'News') return <NewsHit hit={hit} />;
   return <DefaultHit hit={hit} />;
 };
 
-const ResultsContainer = styled.ul`
+const ResultsContainer = styled.ul<{ children?: preact.ComponentChildren; id?: string }>`
   list-style: none;
   padding-left: 0;
   margin-top: 5rem;
@@ -43,8 +44,7 @@ const ResultsContainer = styled.ul`
   }
 `;
 
-const Container = styled.div`
-
+const Container = styled.div<{ children?: preact.ComponentChildren }>`
   @media (min-width: 768px) {
     display: grid;
     grid-template-columns: 1fr 2fr;
@@ -76,14 +76,14 @@ const Container = styled.div`
   }
 `;
 
-const LoadingIndicator = styled.div`
+const LoadingIndicator = styled.div<{ children?: preact.ComponentChildren }>`
   text-align: center;
   padding: 2rem;
   font-size: 1.5rem;
   color: #006CB8;
 `;
 
-const CustomHits: React.FC = () => {
+const CustomHits: FunctionComponent = () => {
   const { hits, showMore, isLastPage } = useInfiniteHits<StanfordHit>();
   const { status } = useInstantSearch();
 
@@ -113,7 +113,7 @@ const CustomHits: React.FC = () => {
   );
 };
 
-const Search: React.FC = () => {
+const Search: FunctionComponent = () => {
   const currentSearchParams = new URLSearchParams(window.location.search);
   const initialUiState: any = {};
 
@@ -143,7 +143,7 @@ const Search: React.FC = () => {
         future={{ preserveSharedStateOnUnmount: true }}
       >
         <Container>
-          <SearchForm searchIndex={searchIndex} searchIndexAsc={searchIndexAsc} searchIndexDesc={searchIndexDesc} />
+          <FilterForm searchIndex={searchIndex} searchIndexAsc={searchIndexAsc} searchIndexDesc={searchIndexDesc} />
           <div>
             <SortBy searchIndex={searchIndex} searchIndexAsc={searchIndexAsc} searchIndexDesc={searchIndexDesc} />
             <CustomHits />
