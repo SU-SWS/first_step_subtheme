@@ -30,8 +30,6 @@ const Search = () => {
     initialUiState.refinementList = { shared_tags: currentSearchParams.get('shared')?.split(',') };
   }
 
-
-
   return (
     <>
       <a href="#results" className="visually-hidden">Skip to results</a>
@@ -39,7 +37,8 @@ const Search = () => {
         searchClient={searchClient}
         indexName={searchIndexAsc}
         routing={true}
-        future={{ preserveSharedStateOnUnmount: true }}
+        future={{
+          preserveSharedStateOnUnmount: true }}
       >
         <Container>
           <FilterForm />

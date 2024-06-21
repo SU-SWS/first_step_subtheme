@@ -12,8 +12,7 @@
   ],
   "scripts": {
     "build": "webpack --env prod",
-    "dev": "webpack serve --env dev",
-    "tsc": "tsc"
+    "dev": "webpack serve --env dev"
   },
   "dependencies": {
     "algoliasearch": "^4.23.3",
