@@ -68,11 +68,9 @@ const DefaultHit: React.FC<{ hit: any }> = ({ hit }) => {
           </div>
         }
       </DetailsContainer>
-      {/* Placeholder for testing */}
-      <img src="https://picsum.photos/1000/750" alt="" />
-      {/* {hit.photo &&
-        <img src={hit.photo.replace(hitUrl.origin, '')} alt=""/>
-      } */}
+      {hit.photo &&
+        <img src={hit.photo.replace(hitUrl.origin, '')} alt="" />
+      }
     </HitContainer>
   )
 }
