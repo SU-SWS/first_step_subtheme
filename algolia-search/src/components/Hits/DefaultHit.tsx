@@ -1,37 +1,12 @@
-import styled from "styled-components";
-import {Highlight, Snippet} from "react-instantsearch";
+import { Highlight, Snippet } from "react-instantsearch";
+import { HitContainer, DetailsContainer } from "../Containers";
+import { type DefaultHitType } from "./hit.types";
 
-const HitContainer: React.FC = styled.article`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 4rem;
-  padding: 2rem 0;
-  margin-bottom: 2rem;
+export type DefaultHitProps = {
+  hit: DefaultHitType;
+};
 
-  @media (min-width: 1200px) {
-    flex-direction: row;
-  }
-
-  &:first-of-type {
-    padding-top: 0;
-  }
-
-  img {
-    aspect-ratio: 2 / 1;
-    max-width: 387px;
-    max-height: 168px;
-    object-fit: cover;
-  }
-`
-
-const DetailsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-`
-
-const DefaultHit: React.FC<{ hit: any }> = ({ hit }) => {
+const DefaultHit = ({ hit }: DefaultHitProps) => {
   const hitUrl = new URL(hit.url);
 
   return (
@@ -68,11 +43,10 @@ const DefaultHit: React.FC<{ hit: any }> = ({ hit }) => {
           </div>
         }
       </DetailsContainer>
-      {/* Placeholder for testing */}
-      <img src="https://picsum.photos/1000/750" alt="" />
-      {/* {hit.photo &&
-        <img src={hit.photo.replace(hitUrl.origin, '')} alt=""/>
-      } */}
+      {console.log(hit.photo)}
+      {hit.photo &&
+        <img src={hit.photo} alt=""/>
+      }
     </HitContainer>
   )
 }

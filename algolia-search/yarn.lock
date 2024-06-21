@@ -5086,7 +5086,7 @@ __metadata:
     css-loader: "npm:^6.11.0"
     dotenv-webpack: "npm:^8.1.0"
     html-webpack-plugin: "npm:^5.6.0"
-    preact: "npm:^10.21.0"
+    preact: "npm:^10.22.0"
     preact-island: "npm:^1.1.2"
     react-instantsearch: "npm:^7.7.3"
     styled-components: "npm:^6.1.9"
@@ -5106,7 +5106,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"preact@npm:^10.10.0, preact@npm:^10.21.0":
+"preact@npm:^10.10.0, preact@npm:^10.22.0":
   version: 10.22.0
   resolution: "preact@npm:10.22.0"
   checksum: 10c0/dc5466c5968c56997e917580c00983cec2f6486a89ea9ba29f1bb88dcfd2f9ff67c8d561a69a1b3acdab17f2bb36b311fef0c348b62e89c332d00c674f7871f0

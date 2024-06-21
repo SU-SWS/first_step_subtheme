@@ -12,11 +12,12 @@
   ],
   "scripts": {
     "build": "webpack --env prod",
-    "dev": "webpack serve --env dev"
+    "dev": "webpack serve --env dev",
+    "tsc": "tsc"
   },
   "dependencies": {
     "algoliasearch": "^4.23.3",
-    "preact": "^10.21.0",
+    "preact": "^10.22.0",
     "react-instantsearch": "^7.7.3",
     "styled-components": "^6.1.9"
   },

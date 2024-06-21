@@ -1,4 +1,12 @@
-export type DefaultHit = {
+import type { Hit } from '@algolia/client-search';
+
+export type AlgoliaHit = Hit & {
+  id: string;
+  name: string;
+  _tags?: string[];
+};
+
+export type DefaultHitType = AlgoliaHit & {
   type: 'Basic Page' | 'Course' | 'Event' | 'Event Series' | 'News' | 'Person' | 'Policy' | 'Publication'
   url: string
   person_full_title?: string
@@ -12,12 +20,12 @@ export type DefaultHit = {
   updated: number
 }
 
-export type NewsHit = DefaultHit & {
+export type NewsHitType = DefaultHitType & {
   byline?: string
   dek?: string
 }
 
-export type PersonHit = DefaultHit & {
+export type PersonHitType = DefaultHitType & {
   type: 'Person'
   person_full_title?: string
   person_short_title?: string
@@ -25,7 +33,7 @@ export type PersonHit = DefaultHit & {
   phone?: number
 }
 
-export type EventHit = DefaultHit & {
+export type EventHitType = DefaultHitType & {
   type: 'Event'
   event_end: number
   event_start: number
@@ -33,10 +41,10 @@ export type EventHit = DefaultHit & {
   email?: string
   subheadline?: string
 }
-export type EventSeries = DefaultHit & {
+export type EventSeriesType = DefaultHitType & {
   type: 'Event Series'
   dek?: string
   subheadline?: string
 }
 
-export type StanfordHit = EventHit | PersonHit | NewsHit | EventSeries| DefaultHit;
+export type StanfordHit = EventHitType | PersonHitType | NewsHitType | EventSeriesType | DefaultHitType;
