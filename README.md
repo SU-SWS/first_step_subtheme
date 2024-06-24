@@ -1,24 +1,20 @@
 # [First Step Subtheme](https://github.com/SU-SWS/first_step_subtheme)
-##### Version: 1.0.2
+##### Version: 1.1.0
 
-Changelog: [Changelog.txt](CHANGELOG.txt)
 
 Description
 ---
 
-The First Step Subtheme is a Stanford sub-theme that works with the Stanford Basic theme and was built by modifying the [Stanford Starter](https://github.com/SU-SWS/stanford_starter) Subtheme. 
+The First Step Subtheme is a Stanford sub-theme that works with the Stanford Basic theme and was built by modifying the [Stanford Starter](https://github.com/SU-SWS/stanford_starter) Subtheme.
 
 Documentation
 ---
-See subtheming guides and best practices here: 
-https://devguide.sites.stanford.edu/front-end/drupal/sub-themes 
+See subtheming guides and best practices here:
+https://devguide.sites.stanford.edu/front-end/drupal/sub-themes
 
 Sites
 ---
-This subtheme is installed on
-https://firststepsandbox-test.sites.stanford.edu/ (TEST) AND
-https://techsource.stanford.edu
-
+This subtheme is installed on https://techsource.stanford.edu
 
 Configuration
 ---

@@ -1,6 +1,6 @@
 {
-  "name": "preact-island-examples",
-  "version": "0.1.0",
+  "name": "algolia-resource-search",
+  "version": "1.1.0",
   "description": "",
   "license": "MIT",
   "main": "dist/index.js",
