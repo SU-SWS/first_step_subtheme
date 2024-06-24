@@ -2539,6 +2539,33 @@ __metadata:
   languageName: node
   linkType: hard
 
+"algolia-resource-search@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "algolia-resource-search@workspace:."
+  dependencies:
+    "@babel/core": "npm:^7.24.5"
+    "@babel/preset-env": "npm:^7.24.5"
+    "@babel/preset-react": "npm:^7.24.1"
+    "@babel/preset-typescript": "npm:^7.24.1"
+    "@types/styled-components": "npm:^5.1.34"
+    "@types/webpack": "npm:^5.28.5"
+    algoliasearch: "npm:^4.23.3"
+    babel-loader: "npm:^9.1.3"
+    babel-plugin-styled-components: "npm:^2.1.4"
+    css-loader: "npm:^6.11.0"
+    dotenv-webpack: "npm:^8.1.0"
+    html-webpack-plugin: "npm:^5.6.0"
+    preact: "npm:^10.22.0"
+    preact-island: "npm:^1.1.2"
+    react-instantsearch: "npm:^7.7.3"
+    styled-components: "npm:^6.1.9"
+    terser-webpack-plugin: "npm:^5.3.10"
+    webpack: "npm:^5.91.0"
+    webpack-cli: "npm:^5.1.4"
+    webpack-dev-server: "npm:^5.0.4"
+  languageName: unknown
+  linkType: soft
+
 "algoliasearch-helper@npm:3.19.0":
   version: 3.19.0
   resolution: "algoliasearch-helper@npm:3.19.0"
@@ -5247,33 +5274,6 @@ __metadata:
   checksum: 10c0/955407b8f70cf0c14acf35dab3615899a2a60a26718a63c848cf3c29f2467b0533991b985a2b994430d890bd7ec2b1963e36352b0774a19143b5f591540f7c06
   languageName: node
   linkType: hard
-
-"preact-island-examples@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "preact-island-examples@workspace:."
-  dependencies:
-    "@babel/core": "npm:^7.24.5"
-    "@babel/preset-env": "npm:^7.24.5"
-    "@babel/preset-react": "npm:^7.24.1"
-    "@babel/preset-typescript": "npm:^7.24.1"
-    "@types/styled-components": "npm:^5.1.34"
-    "@types/webpack": "npm:^5.28.5"
-    algoliasearch: "npm:^4.23.3"
-    babel-loader: "npm:^9.1.3"
-    babel-plugin-styled-components: "npm:^2.1.4"
-    css-loader: "npm:^6.11.0"
-    dotenv-webpack: "npm:^8.1.0"
-    html-webpack-plugin: "npm:^5.6.0"
-    preact: "npm:^10.22.0"
-    preact-island: "npm:^1.1.2"
-    react-instantsearch: "npm:^7.7.3"
-    styled-components: "npm:^6.1.9"
-    terser-webpack-plugin: "npm:^5.3.10"
-    webpack: "npm:^5.91.0"
-    webpack-cli: "npm:^5.1.4"
-    webpack-dev-server: "npm:^5.0.4"
-  languageName: unknown
-  linkType: soft
 
 "preact-island@npm:^1.1.2":
   version: 1.1.2
