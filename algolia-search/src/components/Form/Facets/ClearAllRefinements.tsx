@@ -16,7 +16,7 @@ const ClearAllRefinements = () => {
   }
 
   return (
-    <ResetLink href={window.location.href} onClick={handleResetClick} className="focusable">
+    <ResetLink href={window.location.origin} onClick={handleResetClick} className="focusable">
       Clear all filters
     </ResetLink>
   );

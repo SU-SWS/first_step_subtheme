@@ -5,7 +5,9 @@ export type FilterDropdownButtonProps = {
   children?: preact.ComponentChildren;
 };
 
-const FilterDropdownButton = styled.button<FilterDropdownButtonProps>`
+const FilterDropdownButton = styled.button.attrs<{ $isOpen?: boolean; }>((props: { $isOpen: boolean; }) => ({
+  isOpen: props.$isOpen,
+}))`
   width: 100%;
   border: 1px solid #B1040E;
   padding: 1.2rem 1.4rem;

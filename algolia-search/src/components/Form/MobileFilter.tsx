@@ -1,66 +1,51 @@
 import { FunctionComponent, JSX } from 'preact';
 import { useState } from "preact/compat";
 import { MobileFilterContainer } from '../Containers';
-import { FilterDropdownButton } from './Facets';
-import { MobileChipsContainer, MobileChipsItem, MobileChipsButton, MobileResetLink } from './Chips';
-import { SubDropDownButton, DropDownContent, CheckboxLabel, MobileFilterButton } from './Facets';
+import { CustomRefinementList, FilterDropdownButton } from './Facets';
+import { MobileChipsContainer, MobileResetLink, CustomChips } from './Chips';
+import { SubDropDownButton, DropDownContent, MobileFilterButton } from './Facets';
+import { useCurrentRefinements, useClearRefinements } from 'react-instantsearch';
 
 /**
  * Mobile Filter component
  */
 const MobileFilter = () => {
 
-  // State for mobile filter dropdown
+  // State of refinements.
+  const { canRefine: hasResource } = useCurrentRefinements({ includedAttributes: ['basic_page_type'] });
+  const { canRefine: hasAvailable} = useCurrentRefinements({ includedAttributes: ['shared_tags'] });
+  const { refine:clearAllRefinements, canRefine } = useClearRefinements({ includedAttributes: ['basic_page_type', 'shared_tags'] });
+
+
+  // State for mobile filter dropdown.
   const [isOpen, setIsOpen] = useState(false);
-  // const [resourcesOpen, setResourcesOpen] = useState(
-  //   pageTypeRefinements.some((item: any) => item.isRefined)
-  // );
-  // const [usersOpen, setUsersOpen] = useState(
-  //   sharedRefinements.some((item: any) => item.isRefined)
-  // );
+  const [resourcesOpen, setResourcesOpen] = useState<boolean>(hasResource);
+  const [usersOpen, setUsersOpen] = useState<boolean>(hasAvailable);
 
-  // // Functions for mobile filter dropdown
-  // const toggleOpen: JSX.MouseEventHandler<HTMLButtonElement> = (e) => {
-  //   e.preventDefault();
-  //   setIsOpen(!isOpen);
-  // };
+  // Functions for mobile filter dropdown
+  const toggleOpen: JSX.MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.preventDefault();
+    setIsOpen(!isOpen);
+  };
 
-  // const toggleResourcesOpen: JSX.MouseEventHandler<HTMLButtonElement> = (e) => {
-  //   e.preventDefault();
-  //   setResourcesOpen(!resourcesOpen);
-  // };
+  const toggleResourcesOpen: JSX.MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.preventDefault();
+    setResourcesOpen(!resourcesOpen);
+  };
 
-  // const toggleUsersOpen: JSX.MouseEventHandler<HTMLButtonElement> = (e) => {
-  //   e.preventDefault();
-  //   setUsersOpen(!usersOpen);
-  // };
+  const toggleUsersOpen: JSX.MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.preventDefault();
+    setUsersOpen(!usersOpen);
+  };
 
-  // const handleCheckboxChange = (refineFn: (value: string) => void, item: any) => {
-  //   const isSelected = selectedFilters.includes(item.value);
-  //   if (isSelected) {
-  //     setSelectedFilters(selectedFilters.filter(filter => filter !== item.value));
-  //   } else {
-  //     setSelectedFilters([...selectedFilters, item.value]);
-  //   }
-  //   refineFn(item.value);
-  // };
-
-  // const handleClearAll: JSX.MouseEventHandler<HTMLAnchorElement> = (e) => {
-  //   e.preventDefault();
-  //   setSelectedFilters([]);
-  //   pageTypeRefinements.forEach((item: any) => item.isRefined && refinePageTypes(item.value));
-  //   sharedRefinements.forEach((item: any) => item.isRefined && refineSharedTypes(item.value));
-  // };
-
-  // const handleApply: JSX.MouseEventHandler<HTMLButtonElement> = (e) => {
-  //   e.preventDefault();
-  //   setIsOpen(false);
-  // };
+  const handleApply: JSX.MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.preventDefault();
+    setIsOpen(false);
+  };
 
   return (
     <MobileFilterContainer>
-      I AM MOBILE
-      {/* <FilterDropdownButton isOpen={isOpen} onClick={toggleOpen}>
+      <FilterDropdownButton isOpen={isOpen} onClick={toggleOpen}>
         {isOpen ? 'Filter results by' : 'Filter results'}
         {isOpen ? (
           <svg
@@ -96,13 +81,9 @@ const MobileFilter = () => {
       </FilterDropdownButton>
       {isOpen && (
         <div style={{ border: '1px solid #d2d3d4', borderTop: '0' }}>
-          {selectedFilters.length > 0 && (
+          {canRefine && (
             <MobileChipsContainer>
-              {selectedFilters.map((filter, i) => (
-                <MobileChipsItem key={i}>
-                  <MobileChipsButton onClick={(e: JSX.TargetedMouseEvent<HTMLButtonElement>) => handleChipClick(e, filter)} aria-label={`Clear ${filter} filter`}>{filter}</MobileChipsButton>
-                </MobileChipsItem>
-              ))}
+              <CustomChips isMobile />
             </MobileChipsContainer>
           )}
           <SubDropDownButton onClick={toggleResourcesOpen}>
@@ -145,20 +126,7 @@ const MobileFilter = () => {
           </SubDropDownButton>
           {resourcesOpen && (
             <DropDownContent>
-              {pageTypeRefinements.map((item: any, i: number) => (
-                <li key={i} style={{ marginBottom: '0' }}>
-                  <CheckboxLabel>
-                    <input
-                      type="checkbox"
-                      onChange={() => handleCheckboxChange(refinePageTypes, item)}
-                      checked={item.isRefined}
-                    />
-                    <div style={{ marginTop: '1px' }}>
-                      {item.value} ({item.count})
-                    </div>
-                  </CheckboxLabel>
-                </li>
-              ))}
+              <CustomRefinementList title="Resources" attribute="basic_page_type" isMobile />
             </DropDownContent>
           )}
           <SubDropDownButton onClick={toggleUsersOpen} style={{ borderTop: '1px solid #ccc' }}>
@@ -201,28 +169,15 @@ const MobileFilter = () => {
           </SubDropDownButton>
           {usersOpen && (
             <DropDownContent>
-              {sharedRefinements.map((item: any, i: number) => (
-                <li key={i} style={{ marginBottom: '0' }}>
-                  <CheckboxLabel>
-                    <input
-                      type="checkbox"
-                      onChange={() => handleCheckboxChange(refineSharedTypes, item)}
-                      checked={item.isRefined}
-                    />
-                    <div style={{ marginTop: '1px' }}>
-                      {item.value} ({item.count})
-                    </div>
-                  </CheckboxLabel>
-                </li>
-              ))}
+              <CustomRefinementList title="Available to" attribute="shared_tags" isMobile />
             </DropDownContent>
           )}
           <div style={{ display: 'flex', justifyContent: 'space-between', padding: '1.2rem 1.4rem', backgroundColor: '#F4F4F4' }}>
-            <MobileResetLink href="#" onClick={handleClearAll}>Clear all filters</MobileResetLink>
+            <MobileResetLink href={window.location.origin} onClick={(e: JSX.TargetedMouseEvent<HTMLAnchorElement>) => { e.preventDefault(); clearAllRefinements() }}>Clear all filters</MobileResetLink>
             <MobileFilterButton onClick={handleApply}>View results</MobileFilterButton>
           </div>
         </div>
-      )} */}
+      )}
     </MobileFilterContainer>
   );
 };
