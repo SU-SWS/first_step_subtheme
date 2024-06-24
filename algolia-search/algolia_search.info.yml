@@ -1,0 +1,11 @@
+name: Resources Directory Algolia filter
+machine_name: resources-directory-filter
+type: pdb
+description: 'Algolia filter for Resources Directory'
+package: React
+core_version_requirement: ^9 || ^10
+module_status: active
+presentation: react
+add_js:
+  footer:
+    'dist/islands/algolia-search.island.js': { }
