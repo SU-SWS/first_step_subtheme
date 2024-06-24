@@ -5,76 +5,62 @@ import { FilterDropdownButton } from './Facets';
 import { MobileChipsContainer, MobileChipsItem, MobileChipsButton, MobileResetLink } from './Chips';
 import { SubDropDownButton, DropDownContent, CheckboxLabel, MobileFilterButton } from './Facets';
 
-interface MobileFilterProps {
-  pageTypeRefinements: any;
-  refinePageTypes: (value: string) => void;
-  sharedRefinements: any;
-  refineSharedTypes: (value: string) => void;
-  selectedFilters: string[];
-  setSelectedFilters: (filters: string[]) => void;
-  handleChipClick: (e: JSX.TargetedMouseEvent<HTMLButtonElement>, filter: string) => void;
-}
-
-const MobileFilter: FunctionComponent<MobileFilterProps> = ({
-  pageTypeRefinements,
-  refinePageTypes,
-  sharedRefinements,
-  refineSharedTypes,
-  selectedFilters,
-  setSelectedFilters,
-  handleChipClick
-}) => {
+/**
+ * Mobile Filter component
+ */
+const MobileFilter = () => {
 
   // State for mobile filter dropdown
   const [isOpen, setIsOpen] = useState(false);
-  const [resourcesOpen, setResourcesOpen] = useState(
-    pageTypeRefinements.some((item: any) => item.isRefined)
-  );
-  const [usersOpen, setUsersOpen] = useState(
-    sharedRefinements.some((item: any) => item.isRefined)
-  );
+  // const [resourcesOpen, setResourcesOpen] = useState(
+  //   pageTypeRefinements.some((item: any) => item.isRefined)
+  // );
+  // const [usersOpen, setUsersOpen] = useState(
+  //   sharedRefinements.some((item: any) => item.isRefined)
+  // );
 
-  // Functions for mobile filter dropdown
-  const toggleOpen: JSX.MouseEventHandler<HTMLButtonElement> = (e) => {
-    e.preventDefault();
-    setIsOpen(!isOpen);
-  };
+  // // Functions for mobile filter dropdown
+  // const toggleOpen: JSX.MouseEventHandler<HTMLButtonElement> = (e) => {
+  //   e.preventDefault();
+  //   setIsOpen(!isOpen);
+  // };
 
-  const toggleResourcesOpen: JSX.MouseEventHandler<HTMLButtonElement> = (e) => {
-    e.preventDefault();
-    setResourcesOpen(!resourcesOpen);
-  };
+  // const toggleResourcesOpen: JSX.MouseEventHandler<HTMLButtonElement> = (e) => {
+  //   e.preventDefault();
+  //   setResourcesOpen(!resourcesOpen);
+  // };
 
-  const toggleUsersOpen: JSX.MouseEventHandler<HTMLButtonElement> = (e) => {
-    e.preventDefault();
-    setUsersOpen(!usersOpen);
-  };
+  // const toggleUsersOpen: JSX.MouseEventHandler<HTMLButtonElement> = (e) => {
+  //   e.preventDefault();
+  //   setUsersOpen(!usersOpen);
+  // };
 
-  const handleCheckboxChange = (refineFn: (value: string) => void, item: any) => {
-    const isSelected = selectedFilters.includes(item.value);
-    if (isSelected) {
-      setSelectedFilters(selectedFilters.filter(filter => filter !== item.value));
-    } else {
-      setSelectedFilters([...selectedFilters, item.value]);
-    }
-    refineFn(item.value);
-  };
+  // const handleCheckboxChange = (refineFn: (value: string) => void, item: any) => {
+  //   const isSelected = selectedFilters.includes(item.value);
+  //   if (isSelected) {
+  //     setSelectedFilters(selectedFilters.filter(filter => filter !== item.value));
+  //   } else {
+  //     setSelectedFilters([...selectedFilters, item.value]);
+  //   }
+  //   refineFn(item.value);
+  // };
 
-  const handleClearAll: JSX.MouseEventHandler<HTMLAnchorElement> = (e) => {
-    e.preventDefault();
-    setSelectedFilters([]);
-    pageTypeRefinements.forEach((item: any) => item.isRefined && refinePageTypes(item.value));
-    sharedRefinements.forEach((item: any) => item.isRefined && refineSharedTypes(item.value));
-  };
+  // const handleClearAll: JSX.MouseEventHandler<HTMLAnchorElement> = (e) => {
+  //   e.preventDefault();
+  //   setSelectedFilters([]);
+  //   pageTypeRefinements.forEach((item: any) => item.isRefined && refinePageTypes(item.value));
+  //   sharedRefinements.forEach((item: any) => item.isRefined && refineSharedTypes(item.value));
+  // };
 
-  const handleApply: JSX.MouseEventHandler<HTMLButtonElement> = (e) => {
-    e.preventDefault();
-    setIsOpen(false);
-  };
+  // const handleApply: JSX.MouseEventHandler<HTMLButtonElement> = (e) => {
+  //   e.preventDefault();
+  //   setIsOpen(false);
+  // };
 
   return (
     <MobileFilterContainer>
-      <FilterDropdownButton isOpen={isOpen} onClick={toggleOpen}>
+      I AM MOBILE
+      {/* <FilterDropdownButton isOpen={isOpen} onClick={toggleOpen}>
         {isOpen ? 'Filter results by' : 'Filter results'}
         {isOpen ? (
           <svg
@@ -236,7 +222,7 @@ const MobileFilter: FunctionComponent<MobileFilterProps> = ({
             <MobileFilterButton onClick={handleApply}>View results</MobileFilterButton>
           </div>
         </div>
-      )}
+      )} */}
     </MobileFilterContainer>
   );
 };
