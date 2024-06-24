@@ -19,6 +19,7 @@ const Search = () => {
         searchClient={searchClient}
         indexName='techsource_resources_title_asc'
         routing={true}
+        insights={true}
         future={{
           preserveSharedStateOnUnmount: true }}
       >
