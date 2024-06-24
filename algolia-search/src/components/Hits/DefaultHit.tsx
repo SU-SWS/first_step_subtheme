@@ -44,7 +44,7 @@ const DefaultHit = ({ hit }: DefaultHitProps) => {
         }
       </DetailsContainer>
       {hit.photo &&
-        <img src={hit.photo} alt="" style={{ aspectRatio:'16/9' }} />
+        <img src={hit.photo} alt="" />
       }
     </HitContainer>
   )
