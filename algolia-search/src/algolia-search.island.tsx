@@ -27,7 +27,7 @@ const searchClient = algoliasearch(appId, key);
 const Search = () => {
   return (
     <>
-      <a href="#results" className="visually-hidden">Skip to results</a>
+      <a href="#results" className="visually-hidden focusable">Skip to results</a>
       <InstantSearch
         searchClient={searchClient}
         indexName='techsource_resources_title_asc'
