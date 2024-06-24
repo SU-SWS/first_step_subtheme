@@ -47,12 +47,15 @@ module.exports = ({ dev, prod }) => {
               loader: 'babel-loader',
               options: {
                 babelrc: false,
+                plugins: [
+                  'babel-plugin-styled-components',
+                ],
                 presets: [
                   '@babel/preset-typescript',
                   ['@babel/preset-react', { runtime: 'automatic' }],
                   [
                     '@babel/preset-env',
-                    { targets: { node: 16 }, modules: false },
+                    { targets: { node: 20 }, modules: false },
                   ],
                 ],
               },
