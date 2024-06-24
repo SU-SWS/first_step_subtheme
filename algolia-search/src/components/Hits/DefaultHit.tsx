@@ -43,7 +43,6 @@ const DefaultHit = ({ hit }: DefaultHitProps) => {
           </div>
         }
       </DetailsContainer>
-      {console.log(hit.photo)}
       {hit.photo &&
         <img src={hit.photo} alt=""/>
       }
