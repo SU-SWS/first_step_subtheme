@@ -22,10 +22,19 @@ const HitContainer = styled.article<HitContainerProps>`
 
   img {
     aspect-ratio: 2 / 1;
-    max-width: 387px;
-    max-height: 168px;
+    width: 100%;
     object-fit: cover;
   }
+
+  @media (min-width: 1200px) {
+    img {
+      width: 387px;
+      max-width: 387px;
+      min-width: 387px;
+      max-height: 168px;
+    }
+  }
+
 `
 
 export default HitContainer;
