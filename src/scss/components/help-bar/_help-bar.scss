@@ -16,7 +16,7 @@
     h2 {
       margin-bottom: 0;
       font-size: 1.5625em;
-      font-weight: 400;  
+      font-weight: 400;
       letter-spacing: -.012em;
     }
   }
@@ -43,7 +43,7 @@
           padding-bottom: 0;
         }
       }
-      
+
       .livechat_button a,
       .first-step-button--secondary-white {
         @include first-step-button--secondary-white;
@@ -134,10 +134,10 @@
 
       .first-step-help-bar-text {
         margin-left: 0;
-  
+
         h2 {
           padding-top: 0;
-  
+
           @include grid-media-max('md') {
             margin-right: 1rem;
             margin-left: 1rem;
@@ -165,4 +165,9 @@
   .layout__region {
     overflow-x: clip;
   }
+}
+
+// help bar to very top
+.add-more-space-to-top {
+  margin: 0;
 }
