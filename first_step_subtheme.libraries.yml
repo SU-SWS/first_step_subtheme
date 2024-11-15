@@ -89,7 +89,7 @@
 allpages:
   css:
     theme:
-      dist/css/main.css: { }
+      dist/css/first_step_subtheme.css: { }
 #      dist/css/print.css: { media: print }
 #    base:
 #      dist/css/base.css: { weight: 100 }
