@@ -12,7 +12,7 @@ function first_step_subtheme_preprocess_html(&$variables) {
   $variables['stanford_basic_path'] = \Drupal::service('extension.list.theme')->getPath('stanford_basic');
 }
 
-function first_step_subtheme_preprocess_pattern_localfooter(&$variables) {
+function first_step_subtheme_preprocess_config_pages__stanford_local_footer(&$variables) {
   try {
     $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
   }
